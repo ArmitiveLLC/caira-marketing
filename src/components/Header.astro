@@ -1,0 +1,42 @@
+---
+const navLinks = [
+  { href: '/#directors', label: 'Directors' },
+  { href: '/#teachers', label: 'Teachers' },
+  { href: '/#parents', label: 'Parents' },
+  { href: '/#classroom', label: 'Features' },
+  { href: '/#security', label: 'Security' },
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-caira-navy/10 bg-caira-paper/80 backdrop-blur-md">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
+    <a href="/" class="flex shrink-0 items-center gap-3">
+      <img src="/logo.png" alt="Caira" class="h-9 w-auto" width="120" height="36" />
+    </a>
+
+    <nav class="hidden items-center gap-6 lg:flex" aria-label="Main">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm font-medium text-caira-navy/80 transition hover:text-caira-teal"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-2 sm:gap-3">
+      <a
+        href="https://app.caira.care"
+        class="hidden text-sm font-medium text-caira-navy/80 transition hover:text-caira-teal lg:inline"
+      >
+        Sign in to app.caira.care
+      </a>
+      <a href="/#pilot" class="btn-primary whitespace-nowrap text-xs sm:text-sm">
+        Ask about pilot
+      </a>
+    </div>
+  </div>
+</header>

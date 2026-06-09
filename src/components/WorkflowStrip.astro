@@ -1,0 +1,72 @@
+---
+const steps = [
+  {
+    label: 'Capture',
+    title: 'Voice, photo, or text',
+    detail: 'Teachers log in the moment — hands stay with kids.',
+    icon: 'M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z',
+    color: 'from-caira-teal to-caira-cyan',
+  },
+  {
+    label: 'Structure',
+    title: 'AI drafts against GELDS',
+    detail: 'Observations mapped to standards — ready for review.',
+    icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+    color: 'from-caira-navy to-caira-teal',
+  },
+  {
+    label: 'Approve',
+    title: 'Staff stays in control',
+    detail: 'Every log and narrative reviewed before it ships.',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    color: 'from-caira-cyan to-caira-mint',
+  },
+  {
+    label: 'Connect',
+    title: 'Warm parent stories',
+    detail: 'Daily narratives, menus, and messages in one app.',
+    icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+    color: 'from-caira-coral to-caira-teal',
+  },
+];
+---
+
+<div class="workflow-strip relative overflow-hidden rounded-3xl border border-caira-navy/10 bg-white p-6 shadow-xl shadow-caira-navy/5 md:p-10">
+  <div class="pointer-events-none absolute -left-20 top-0 h-40 w-40 rounded-full bg-caira-mint/40 blur-3xl" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute -right-16 bottom-0 h-48 w-48 rounded-full bg-caira-cyan/20 blur-3xl" aria-hidden="true"></div>
+
+  <p class="relative text-center text-xs font-bold uppercase tracking-[0.2em] text-caira-teal">
+    The Caira loop
+  </p>
+  <p class="relative mt-2 text-center text-lg font-semibold text-caira-navy md:text-xl">
+    From classroom moment to parent story — in one flow
+  </p>
+
+  <ol class="relative mt-10 grid gap-6 md:grid-cols-4 md:gap-4">
+    {
+      steps.map((step, i) => (
+        <li class="workflow-step relative flex flex-col items-center text-center">
+          {i < steps.length - 1 && (
+            <span
+              class="workflow-connector hidden md:block"
+              aria-hidden="true"
+            />
+          )}
+          <span
+            class:list={[
+              'flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br text-white shadow-lg',
+              step.color,
+            ]}
+          >
+            <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+              <path stroke-linecap="round" stroke-linejoin="round" d={step.icon} />
+            </svg>
+          </span>
+          <p class="mt-4 text-[10px] font-bold uppercase tracking-widest text-caira-teal">{step.label}</p>
+          <h3 class="mt-1 text-sm font-bold text-caira-navy">{step.title}</h3>
+          <p class="mt-2 text-xs leading-relaxed text-caira-navy/65">{step.detail}</p>
+        </li>
+      ))
+    }
+  </ol>
+</div>

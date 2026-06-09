@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('legal', 'terms');
+if (!entry) throw new Error('Terms content not found');
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  <article class="section-pad prose prose-caira max-w-3xl">
+    <p class="text-sm text-caira-navy/60">Last updated {entry.data.lastUpdated}</p>
+    <h1>{entry.data.title}</h1>
+    <Content />
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .prose-caira {
+    @apply text-caira-navy;
+  }
+
+  .prose-caira h2 {
+    @apply mt-10 mb-4 text-xl font-display font-semibold text-caira-navy;
+  }
+
+  .prose-caira h3 {
+    @apply mt-6 mb-2 text-lg font-display font-semibold text-caira-navy;
+  }
+
+  .prose-caira p,
+  .prose-caira li {
+    @apply leading-relaxed text-caira-navy/90;
+  }
+
+  .prose-caira ul {
+    @apply my-4 list-disc space-y-2 pl-6;
+  }
+
+  .prose-caira a {
+    @apply text-caira-teal underline decoration-caira-teal/30 underline-offset-2 hover:decoration-caira-teal;
+  }
+
+  .prose-caira strong {
+    @apply font-semibold text-caira-navy;
+  }
+</style>

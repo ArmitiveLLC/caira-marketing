@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;1,400&family=Montserrat:wght@600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-caira-paper text-caira-navy font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-caira bg-caira-teal px-6 py-3 text-sm font-semibold text-white shadow-md shadow-caira-teal/25 transition hover:-translate-y-0.5 hover:bg-caira-teal/90 hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-caira border border-caira-navy/15 bg-white/80 px-6 py-3 text-sm font-semibold text-caira-navy backdrop-blur transition hover:border-caira-teal hover:text-caira-teal;
+  }
+
+  .section-pad {
+    @apply mx-auto max-w-6xl px-6 py-16 md:py-24;
+  }
+
+  .section-eyebrow {
+    @apply inline-block rounded-full border border-caira-teal/25 bg-caira-mint/30 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-caira-teal;
+  }
+
+  .section-eyebrow-light {
+    @apply inline-block rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-caira-cyan;
+  }
+
+  .audience-tag {
+    @apply inline-block rounded-full bg-caira-mint/50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-caira-navy;
+  }
+
+  .feature-card {
+    @apply rounded-2xl border border-caira-navy/10 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-caira-teal/25 hover:shadow-lg hover:shadow-caira-teal/10;
+  }
+
+  .ai-sample {
+    font-family: 'Lora', Georgia, serif;
+  }
+
+  /* Hero */
+  .hero-mesh {
+    background:
+      radial-gradient(ellipse 80% 60% at 10% 0%, rgba(76, 203, 200, 0.18), transparent 55%),
+      radial-gradient(ellipse 70% 50% at 90% 10%, rgba(184, 220, 192, 0.35), transparent 50%),
+      radial-gradient(ellipse 50% 40% at 50% 100%, rgba(92, 161, 156, 0.12), transparent 60%);
+  }
+
+  .hero-preview {
+    @apply w-full max-w-md;
+  }
+
+  .hero-preview-glow {
+    @apply absolute -inset-4 rounded-3xl bg-gradient-to-br from-caira-cyan/30 via-caira-mint/20 to-caira-teal/20 blur-2xl;
+  }
+
+  .hero-preview-card {
+    @apply relative rounded-2xl border border-white/60 bg-white/90 p-5 shadow-2xl shadow-caira-navy/10 backdrop-blur-sm;
+    animation: hero-float 6s ease-in-out infinite;
+  }
+
+  .workflow-connector {
+    @apply absolute left-[calc(50%+2rem)] top-7 h-0.5 w-[calc(100%-4rem)] bg-gradient-to-r from-caira-teal/50 to-caira-cyan/50;
+  }
+
+  .workflow-step:hover .workflow-connector {
+    @apply from-caira-teal to-caira-cyan;
+  }
+
+  .compare-row-highlight {
+    @apply relative rounded-xl bg-gradient-to-r from-caira-mint/30 to-caira-cyan/10 px-4 py-3;
+  }
+
+  .narrative-quote blockquote::before {
+    content: '\201C';
+    @apply mr-1 text-caira-cyan/60;
+  }
+
+  .stat-pill {
+    @apply flex items-center gap-2 rounded-full border border-caira-navy/10 bg-white/70 px-4 py-2 text-sm font-medium text-caira-navy/80 backdrop-blur;
+  }
+
+  .role-card-director {
+    @apply border-t-4 border-t-caira-navy;
+  }
+
+  .role-card-teacher {
+    @apply border-t-4 border-t-caira-teal;
+  }
+
+  .role-card-parent {
+    @apply border-t-4 border-t-caira-cyan;
+  }
+
+  .feature-icon-wrap {
+    @apply mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-caira-teal to-caira-cyan text-white shadow-md shadow-caira-teal/30;
+  }
+
+  .bento-card {
+    @apply relative overflow-hidden rounded-2xl border border-caira-navy/10 bg-gradient-to-br from-white to-caira-mint/15 p-8;
+  }
+
+  .bento-card::before {
+    content: '';
+    @apply pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-caira-cyan/15 blur-2xl;
+  }
+
+  .step-line {
+    @apply absolute left-0 right-0 top-6 hidden h-0.5 bg-gradient-to-r from-transparent via-caira-teal/40 to-transparent md:block;
+  }
+
+  .pilot-card {
+    @apply relative overflow-hidden rounded-3xl border border-caira-teal/20 bg-white p-10 text-center shadow-xl md:p-14;
+  }
+
+  .pilot-card::before {
+    content: '';
+    @apply pointer-events-none absolute inset-0 bg-gradient-to-br from-caira-mint/30 via-transparent to-caira-cyan/10;
+  }
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}

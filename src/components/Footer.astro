@@ -1,0 +1,27 @@
+---
+const footerLinks = [
+  { href: '/privacy', label: 'Privacy' },
+  { href: '/support', label: 'Support' },
+  { href: '/terms', label: 'Terms' },
+  { href: 'https://app.caira.care', label: 'Sign in', external: true },
+];
+---
+
+<footer class="border-t border-caira-navy/10 bg-white">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 sm:flex-row">
+    <p class="text-sm text-caira-navy/60">&copy; {new Date().getFullYear()} Caira</p>
+    <nav class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2" aria-label="Footer">
+      {
+        footerLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm text-caira-navy/70 transition hover:text-caira-teal"
+            {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</footer>
