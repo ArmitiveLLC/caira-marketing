@@ -27,17 +27,62 @@ Do **not** run `npm audit fix --force` — it downgrades `@astrojs/tailwind` and
 
 ## Deploy
 
+### One-time Firebase setup (caira-prod)
+
+Marketing uses a **dedicated Hosting site** — separate from the portal web app (`armitive-web`) and from `app.caira.care` (Cloud Run).
+
+You do **not** need a new Firebase Web App (no SDK). Create a separate Hosting site:
+
+1. [Firebase Console](https://console.firebase.google.com) → project **caira-prod**
+2. **Build → Hosting**
+3. If Hosting is not enabled yet, click **Get started** once
+4. Click **Add another site**
+5. Site ID: **`caira-care`** (must match `firebase.json` → `hosting.site`)
+6. After the first deploy, open site **caira-care** → **Add custom domain** → `caira.care`
+
+Preview URL after deploy: `https://caira-care.web.app`
+
+CLI alternative to create the site (once):
+
+```bash
+npm exec firebase hosting:sites:create caira-care --project caira-prod
+```
+
+| Property | Marketing | Portal |
+| -------- | --------- | ------ |
+| Hosting site | `caira-care` | `armitive-web` (if used) |
+| Custom domain | `caira.care` | `app.caira.care` (Cloud Run) |
+| Firebase Web App | None (static site) | `armitive-web` (Auth SDK) |
+
+### GitHub secret: `FIREBASE_TOKEN`
+
+Firebase CLI does **not** accept Workload Identity credentials. Use a CI token instead (one-time setup):
+
+```bash
+npm install -g firebase-tools
+firebase login:ci
+```
+
+Sign in with a Google account that has **Firebase Hosting Admin** on `caira-prod`. Copy the token, then:
+
+```bash
+gh secret set FIREBASE_TOKEN -R ArmitiveLLC/caira-marketing
+```
+
+Or paste it in GitHub → **caira-marketing → Settings → Secrets → Actions → New secret** → name `FIREBASE_TOKEN`.
+
+### CI workflow
+
 Pushes to `main` run `.github/workflows/deploy.yml`:
 
 1. `npm ci` and `npm run build`
-2. Authenticate via Workload Identity Federation (`WIF_PROVIDER_PROD`, `CICD_SA_EMAIL_PROD`)
-3. `firebase deploy --only hosting --project caira-prod`
+2. `firebase deploy --only hosting:caira-care --project caira-prod` using `FIREBASE_TOKEN`
 
 Manual deploy (requires Firebase CLI and GCP credentials):
 
 ```bash
 npm run build
-firebase deploy --only hosting --project caira-prod
+npm exec firebase deploy --only hosting:caira-care --project caira-prod
 ```
 
 ## App & store URLs cheat sheet

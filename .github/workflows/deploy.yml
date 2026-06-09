@@ -15,10 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
 
-    permissions:
-      contents: read
-      id-token: write
-
     steps:
       - uses: actions/checkout@v4
 
@@ -34,14 +30,7 @@ jobs:
       - name: Build site
         run: npm run build
 
-      - name: Authenticate to GCP via WIF
-        uses: google-github-actions/auth@v2
-        with:
-          workload_identity_provider: ${{ secrets.WIF_PROVIDER_PROD }}
-          service_account: ${{ secrets.CICD_SA_EMAIL_PROD }}
-
-      - name: Set up gcloud
-        uses: google-github-actions/setup-gcloud@v2
-
-      - name: Deploy to Firebase Hosting
-        run: npx firebase-tools deploy --only hosting --project caira-prod --non-interactive
+      - name: Deploy to Firebase Hosting (caira-care site)
+        run: npm exec firebase deploy --only hosting:caira-care --project caira-prod --non-interactive
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
