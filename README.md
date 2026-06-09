@@ -82,7 +82,7 @@ Manual deploy (requires Firebase CLI and GCP credentials):
 
 ```bash
 npm run build
-npm exec firebase deploy --only hosting:caira-care --project caira-prod
+npx firebase deploy --only hosting:caira-care --project caira-prod
 ```
 
 ## App & store URLs cheat sheet
