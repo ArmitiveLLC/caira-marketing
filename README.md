@@ -37,20 +37,20 @@ You do **not** need a new Firebase Web App (no SDK). Create a separate Hosting s
 2. **Build → Hosting**
 3. If Hosting is not enabled yet, click **Get started** once
 4. Click **Add another site**
-5. Site ID: **`caira-care`** (must match `firebase.json` → `hosting.site`)
-6. After the first deploy, open site **caira-care** → **Add custom domain** → `caira.care`
+5. Site ID: **`caira-care-eaf48`** (must match `firebase.json` → `hosting.site`; IDs are globally unique — `caira-care` was taken)
+6. After the first deploy, open site **caira-care-eaf48** → **Add custom domain** → `caira.care`
 
-Preview URL after deploy: `https://caira-care.web.app`
+Preview URL after deploy: `https://caira-care-eaf48.web.app`
 
 CLI alternative to create the site (once):
 
 ```bash
-npm exec firebase hosting:sites:create caira-care --project caira-prod
+npx firebase hosting:sites:create caira-care-eaf48 --project caira-prod
 ```
 
 | Property | Marketing | Portal |
 | -------- | --------- | ------ |
-| Hosting site | `caira-care` | `armitive-web` (if used) |
+| Hosting site | `caira-care-eaf48` | `caira-prod` / `armitive-web` |
 | Custom domain | `caira.care` | `app.caira.care` (Cloud Run) |
 | Firebase Web App | None (static site) | `armitive-web` (Auth SDK) |
 
@@ -76,13 +76,13 @@ Or paste it in GitHub → **caira-marketing → Settings → Secrets → Actions
 Pushes to `main` run `.github/workflows/deploy.yml`:
 
 1. `npm ci` and `npm run build`
-2. `firebase deploy --only hosting:caira-care --project caira-prod` using `FIREBASE_TOKEN`
+2. `firebase deploy --only hosting:caira-care-eaf48 --project caira-prod` using `FIREBASE_TOKEN`
 
 Manual deploy (requires Firebase CLI and GCP credentials):
 
 ```bash
 npm run build
-npx firebase deploy --only hosting:caira-care --project caira-prod
+npx firebase deploy --only hosting:caira-care-eaf48 --project caira-prod
 ```
 
 ## App & store URLs cheat sheet

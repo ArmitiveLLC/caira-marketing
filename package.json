@@ -7,7 +7,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "deploy:hosting": "firebase deploy --only hosting:caira-care --project caira-prod"
+    "deploy:hosting": "firebase deploy --only hosting:caira-care-eaf48 --project caira-prod"
   },
   "engines": {
     "node": ">=24.0.0"

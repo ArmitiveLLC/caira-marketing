@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "caira-care",
+    "site": "caira-care-eaf48",
     "public": "dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "headers": [
