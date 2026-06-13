@@ -14,34 +14,3 @@ const { Content } = await render(entry);
     <Content />
   </article>
 </BaseLayout>
-
-<style is:global>
-  .prose-caira {
-    @apply text-caira-navy;
-  }
-
-  .prose-caira h2 {
-    @apply mt-10 mb-4 text-xl font-display font-semibold text-caira-navy;
-  }
-
-  .prose-caira h3 {
-    @apply mt-6 mb-2 text-lg font-display font-semibold text-caira-navy;
-  }
-
-  .prose-caira p,
-  .prose-caira li {
-    @apply leading-relaxed text-caira-navy/90;
-  }
-
-  .prose-caira ul {
-    @apply my-4 list-disc space-y-2 pl-6;
-  }
-
-  .prose-caira a {
-    @apply text-caira-teal underline decoration-caira-teal/30 underline-offset-2 hover:decoration-caira-teal;
-  }
-
-  .prose-caira strong {
-    @apply font-semibold text-caira-navy;
-  }
-</style>

@@ -1,0 +1,70 @@
+---
+import DeviceFrame from './DeviceFrame.astro';
+import BrowserFrame from './BrowserFrame.astro';
+
+export interface HeroSlide {
+  type: 'phone' | 'browser';
+  src: string;
+  alt: string;
+  label: string;
+  line: string;
+}
+
+interface Props {
+  slides: HeroSlide[];
+}
+
+const { slides } = Astro.props;
+const first = slides[0];
+---
+
+<div class="hero-stage" data-hero-stage>
+  <div class="hero-stage-orbs" aria-hidden="true">
+    <span class="hero-stage-orb hero-stage-orb-a"></span>
+    <span class="hero-stage-orb hero-stage-orb-b"></span>
+    <span class="hero-stage-orb hero-stage-orb-c"></span>
+  </div>
+
+  <div class="hero-stage-viewport">
+    {
+      slides.map((slide, i) => (
+        <article
+          class:list={['hero-stage-slide', i === 0 && 'is-active']}
+          data-hero-slide={i}
+          data-hero-frame={slide.type}
+          data-hero-label={slide.label}
+          data-hero-line={slide.line}
+          hidden={i !== 0}
+          aria-hidden={i !== 0}
+        >
+          <div class="hero-stage-frame">
+            {
+              slide.type === 'phone' ? (
+                <DeviceFrame
+                  src={slide.src}
+                  alt={slide.alt}
+                  class="hero-stage-device"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  fetchpriority={i === 0 ? 'high' : undefined}
+                />
+              ) : (
+                <BrowserFrame
+                  src={slide.src}
+                  alt={slide.alt}
+                  class="hero-stage-window"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  fetchpriority={i === 0 ? 'high' : undefined}
+                />
+              )
+            }
+          </div>
+        </article>
+      ))
+    }
+  </div>
+
+  <div class="hero-stage-caption" aria-live="polite">
+    <span class="hero-stage-caption-label" data-hero-caption-label>{first.label}</span>
+    <span class="hero-stage-caption-line" data-hero-caption-line>{first.line}</span>
+  </div>
+</div>

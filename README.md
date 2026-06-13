@@ -76,13 +76,36 @@ Or paste it in GitHub → **caira-marketing → Settings → Secrets → Actions
 Pushes to `main` run `.github/workflows/deploy.yml`:
 
 1. `npm ci` and `npm run build`
-2. `firebase deploy --only hosting:caira-care-eaf48 --project caira-prod` using `FIREBASE_TOKEN`
+2. `npm ci` in `functions/` and compile TypeScript (via Firebase predeploy)
+3. `firebase deploy --only hosting:caira-care-eaf48,functions:pilotRequest --project caira-prod` using `FIREBASE_TOKEN`
 
 Manual deploy (requires Firebase CLI and GCP credentials):
 
 ```bash
 npm run build
-npx firebase deploy --only hosting:caira-care-eaf48 --project caira-prod
+npx firebase deploy --only hosting:caira-care-eaf48,functions:pilotRequest --project caira-prod
+```
+
+### Pilot inquiry form (Resend)
+
+The **Ask about a pilot** form posts to `/api/pilot`, rewritten to the `pilotRequest` Cloud Function, which sends email via [Resend](https://resend.com) to **info@caira.care**.
+
+**One-time setup (caira-prod):**
+
+```bash
+# Resend API key (same key used for noreply@caira.care is fine)
+firebase functions:secrets:set RESEND_API_KEY --project caira-prod
+```
+
+Ensure `noreply@caira.care` is verified in Resend and the domain `caira.care` has SPF/DKIM configured. Emails are sent to **info@caira.care** by default (`PILOT_EMAIL` param).
+
+**Local dev:** Astro dev does not run the function. Either:
+
+1. `firebase emulators:start --only hosting,functions` from repo root (after `npm run build`), or
+2. Set `PUBLIC_PILOT_API_URL` in `.env` to the deployed function URL (see `.env.example`).
+
+```bash
+cd functions && npm ci && npm run build
 ```
 
 ## App & store URLs cheat sheet

@@ -1,10 +1,119 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
-import HeroPreview from '../components/HeroPreview.astro';
+import HeroShowcase from '../components/HeroShowcase.astro';
+import BrowserFrame from '../components/BrowserFrame.astro';
+import DeviceFrame from '../components/DeviceFrame.astro';
 import WorkflowStrip from '../components/WorkflowStrip.astro';
 import NarrativeQuote from '../components/NarrativeQuote.astro';
 import SecurityTrust from '../components/SecurityTrust.astro';
+import Marquee from '../components/Marquee.astro';
+import StatsStrip from '../components/StatsStrip.astro';
+import RoleBlock from '../components/RoleBlock.astro';
+import Reveal from '../components/Reveal.astro';
+import SpotlightSection from '../components/SpotlightSection.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import ScreenshotShowcase from '../components/ScreenshotShowcase.astro';
+
+const screenshots = {
+  director: '/screenshots/web-state-compliance.png',
+  teacher: '/screenshots/app-teacher-voice-log.png',
+  heroPhone: '/screenshots/app-teacher-log-menu.png',
+  parent: '/screenshots/app-parent-home.png',
+  portal: '/screenshots/web-director-dashboard.png',
+  lessonPlans: '/screenshots/web-lesson-planner.png',
+  mealPlans: '/screenshots/web-meal-plans.png',
+  learningManager: '/screenshots/web-learning-manager.png',
+  aiAssistant: '/screenshots/web-ai-lesson-assistant.png',
+  teacherReview: '/screenshots/app-teacher-review-draft.png',
+  parentStory: '/screenshots/app-parent-daily-story.png',
+  teacherLogMenu: '/screenshots/app-teacher-log-menu.png',
+  parentInsights: '/screenshots/app-parent-updates.png',
+};
+
+const heroSlides = [
+  {
+    type: 'phone' as const,
+    src: screenshots.heroPhone,
+    alt: 'Teacher logging menu with voice, photo, or manual options',
+    label: 'Teacher app',
+    line: 'Voice, photo, or manual — log in seconds',
+  },
+  {
+    type: 'phone' as const,
+    src: screenshots.teacher,
+    alt: 'Teacher recording a voice log in the classroom',
+    label: 'Voice logging',
+    line: 'Speak naturally — Caira drafts the documentation',
+  },
+  {
+    type: 'phone' as const,
+    src: screenshots.teacherReview,
+    alt: 'Teacher reviewing an AI-drafted log before saving',
+    label: 'Review & approve',
+    line: 'Teachers stay in control of every entry',
+  },
+  {
+    type: 'browser' as const,
+    src: screenshots.portal,
+    alt: 'Director dashboard with staffing and compliance overview',
+    label: 'Director portal',
+    line: 'Compliance, staffing, and approvals at a glance',
+  },
+  {
+    type: 'browser' as const,
+    src: screenshots.director,
+    alt: 'State compliance tracking for childcare centers',
+    label: 'State compliance',
+    line: 'DECAL-aware tracking so nothing slips through',
+  },
+  {
+    type: 'phone' as const,
+    src: screenshots.parent,
+    alt: 'Parent home screen with child updates and shortcuts',
+    label: 'Parent app',
+    line: 'Daily updates, stories, and two-way messaging',
+  },
+  {
+    type: 'phone' as const,
+    src: screenshots.parentStory,
+    alt: 'AI-generated daily story for parents',
+    label: 'Daily stories',
+    line: 'Classroom moments turned into parent-ready narratives',
+  },
+  {
+    type: 'browser' as const,
+    src: screenshots.aiAssistant,
+    alt: 'AI lesson planning assistant in the web portal',
+    label: 'AI lesson assistant',
+    line: 'Curriculum-aligned plans in minutes, not hours',
+  },
+  {
+    type: 'browser' as const,
+    src: screenshots.lessonPlans,
+    alt: 'Weekly lesson planner with GELDS objectives',
+    label: 'Lesson planner',
+    line: 'GELDS & GOLD aligned plans per classroom',
+  },
+  {
+    type: 'browser' as const,
+    src: screenshots.mealPlans,
+    alt: 'CACFP meal planning calendar',
+    label: 'Meal planning',
+    line: 'CACFP-compliant menus linked to your calendar',
+  },
+];
+
+const marqueeItems = [
+  'GELDS aligned',
+  'GOLD framework',
+  'CACFP meals',
+  'DECAL-ready',
+  'Bilingual EN / ES',
+  'Voice & photo logs',
+  'AI daily narratives',
+  'Mobile apps for every role',
+];
 
 const problemItems = [
   {
@@ -30,6 +139,9 @@ const roleCards = [
     title: 'Run the center with clarity',
     body: 'See ratio, compliance, staffing, and classroom activity from the web or your phone. Approve lesson and meal plans before they go live.',
     bullets: ['DECAL compliance dashboard', 'Director mobile command center', 'Learning Manager + meal plans'],
+    screenshot: screenshots.director,
+    screenshotAlt: 'Caira DECAL state compliance dashboard',
+    frame: 'browser',
   },
   {
     id: 'teachers',
@@ -39,6 +151,9 @@ const roleCards = [
     title: 'Log in seconds, teach more',
     body: 'Capture the day with voice or photo. Caira structures logs against GELDS and GOLD — you review, then publish to families.',
     bullets: ['Voice, photo & text logging', 'Published lesson cards on mobile', 'Parent messaging & attendance'],
+    screenshot: screenshots.teacher,
+    screenshotAlt: 'Caira teacher AI voice logging on mobile',
+    frame: 'device',
   },
   {
     id: 'parents',
@@ -48,6 +163,9 @@ const roleCards = [
     title: 'See the real day',
     body: 'Warm daily and weekly narratives tied to what actually happened — plus messages, menus, and check-in from one app.',
     bullets: ['AI daily & weekly stories', 'Activity feed with photos', 'English & Spanish UI'],
+    screenshot: screenshots.parent,
+    screenshotAlt: 'Caira parent home with daily updates and photos',
+    frame: 'device',
   },
 ];
 
@@ -56,16 +174,22 @@ const classroomFeatures = [
     title: 'Voice & photo logs',
     body: 'Speak a moment or snap a photo. Caira drafts structured activity records for teacher review — no end-of-day typing marathons.',
     icon: 'M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z',
+    screenshot: screenshots.teacherLogMenu,
+    screenshotAlt: 'Teacher choosing voice, photo, or manual logging on mobile',
   },
   {
     title: 'Behavioral insights',
     body: 'Spot patterns in naps, transitions, and social dynamics — grounded in approved logs, with source observations cited.',
     icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
+    screenshot: screenshots.parentInsights,
+    screenshotAlt: 'Parent app showing weekly developmental insights and digests for each child',
   },
   {
     title: 'Parent narratives',
     body: 'Nightly AI summaries and weekly developmental digests — professional, warm, and tied to curriculum standards.',
     icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
+    screenshot: screenshots.parentStory,
+    screenshotAlt: 'AI-generated daily story shared with parents',
   },
 ];
 
@@ -74,12 +198,12 @@ const operationsFeatures = [
     title: 'Lesson planning',
     subtitle: 'GELDS · GOLD · Creative Curriculum',
     body: 'Directors set the weekly theme; teachers build standards-aware plans with AI assistance. Draft → approve → published cards on mobile.',
-    icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13',
+    icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
   },
   {
     title: 'Meal planning',
     subtitle: 'CACFP-aware · allergen flags',
-    body: 'AI-suggested weekly menus that respect every child\'s allergies. Parents see the published menu; kitchen keeps reimbursement-ready records.',
+    body: "AI-suggested weekly menus that respect every child's allergies. Parents see the published menu; kitchen keeps reimbursement-ready records.",
     icon: 'M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z',
   },
 ];
@@ -108,95 +232,107 @@ const compareRows = [
 
 <BaseLayout title="Caira">
   <!-- Hero -->
-  <section class="hero-mesh relative overflow-hidden border-b border-caira-navy/5">
-    <div class="section-pad pb-20 pt-8 md:pt-12">
-      <div class="grid items-center gap-14 lg:grid-cols-2 lg:gap-10">
-        <div class="relative z-10 animate-fade-up">
-          <p class="section-eyebrow mb-5">The AI co-pilot for childcare</p>
-          <h1 class="text-4xl font-bold leading-[1.1] text-caira-navy md:text-5xl lg:text-[3.25rem]">
-            Less paperwork.<br />
-            <span class="bg-gradient-to-r from-caira-teal to-caira-cyan bg-clip-text text-transparent">
-              More presence
-            </span>
-            in the classroom.
-          </h1>
-          <p class="mt-6 max-w-lg text-lg leading-relaxed text-caira-navy/75">
-            Caira turns voice notes and photos into curriculum-aligned documentation, behavioral
-            insights, and parent-ready stories — while directors stay compliant from desk or floor.
-          </p>
-          <div class="mt-8 flex flex-wrap gap-4">
-            <a href="#pilot" class="btn-primary">
-              Ask about a pilot
-              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-            </a>
-            <a href="https://app.caira.care/sign-in" class="btn-secondary">Sign in to portal</a>
-          </div>
-          <div class="mt-10 flex flex-wrap gap-2">
-            {trustPills.map((pill) => <span class="stat-pill">{pill}</span>)}
-          </div>
+  <section class="hero-mesh relative overflow-visible border-b border-caira-navy/5">
+    <div class="pointer-events-none absolute -right-32 top-20 h-96 w-96 rounded-full bg-caira-cyan/15 blur-3xl" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute -left-24 bottom-10 h-72 w-72 rounded-full bg-caira-mint/30 blur-3xl" aria-hidden="true"></div>
+    <div class="hero-pad">
+      <div class="hero-grid grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14">
+        <div data-reveal-stagger>
+          <Reveal>
+            <p class="section-eyebrow mb-5">The AI co-pilot for childcare</p>
+            <h1 class="text-4xl font-bold leading-[1.08] text-caira-navy md:text-5xl lg:text-[3.25rem] xl:text-[3.5rem]">
+              Less paperwork.<br />
+              <span class="text-gradient">More presence</span>
+              in the classroom.
+            </h1>
+            <p class="mt-6 max-w-lg text-lg leading-relaxed text-caira-navy/75">
+              Caira turns voice notes and photos into curriculum-aligned documentation, behavioral
+              insights, and parent-ready stories — while directors stay compliant from desk or floor.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-4">
+              <a href="#pilot" class="btn-primary">
+                Ask about a pilot
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+              </a>
+              <a href="https://app.caira.care/sign-in" class="btn-secondary">Sign in to portal</a>
+            </div>
+          </Reveal>
         </div>
-        <div class="relative z-10 flex justify-center lg:justify-end">
-          <HeroPreview />
-        </div>
+
+        <Reveal direction="right" delay={0.1} class="flex justify-center lg:justify-end">
+          <HeroShowcase slides={heroSlides} />
+        </Reveal>
+      </div>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-2 lg:mt-10 lg:justify-start" data-reveal-stagger>
+        {trustPills.map((pill, i) => (
+          <Reveal delay={i * 0.05} class="inline-block">
+            <span class="stat-pill">{pill}</span>
+          </Reveal>
+        ))}
       </div>
     </div>
   </section>
 
+  <Marquee items={marqueeItems} />
+  <StatsStrip />
+
   <!-- Workflow -->
-  <section class="section-pad -mt-6 pb-8 pt-0 md:-mt-10">
+  <section class="section-pad -mt-4 pb-8 pt-0">
     <WorkflowStrip />
   </section>
 
   <!-- Problem -->
-  <section class="bg-caira-navy text-white">
+  <SpotlightSection>
     <div class="section-pad py-14">
-      <SectionHeading
-        eyebrow="The challenge"
-        title="Centers shouldn't choose between teaching and paperwork"
-        subtitle="Legacy software solves billing. Caira solves the documentation and communication gap."
-        light
-      />
-      <ul class="mt-12 grid gap-5 md:grid-cols-3">
+      <Reveal>
+        <SectionHeading
+          eyebrow="The challenge"
+          title="Centers shouldn't choose between teaching and paperwork"
+          subtitle="Legacy software solves billing. Caira solves the documentation and communication gap."
+          light
+        />
+      </Reveal>
+      <ul class="mt-12 grid gap-5 md:grid-cols-3" data-reveal-stagger>
         {
-          problemItems.map((item) => (
-            <li class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:bg-white/10">
-              <p class="text-xs font-bold uppercase tracking-widest text-caira-cyan">{item.label}</p>
-              <p class="mt-3 text-base leading-relaxed text-white/85">{item.text}</p>
-            </li>
+          problemItems.map((item, i) => (
+            <Reveal delay={i * 0.08}>
+              <li class="glass-card-dark p-6 transition hover:bg-white/10">
+                <p class="eyebrow-mono text-caira-cyan">{item.label}</p>
+                <p class="mt-3 text-base leading-relaxed text-white/85">{item.text}</p>
+              </li>
+            </Reveal>
           ))
         }
       </ul>
     </div>
-  </section>
+  </SpotlightSection>
 
   <!-- Roles -->
   <section id="roles" class="section-pad scroll-mt-24">
-    <SectionHeading
-      eyebrow="Your team"
-      title="Built for directors, teachers, and parents"
-      subtitle="Each role gets a tailored experience — web portal and mobile apps included."
-    />
-    <div class="mt-14 grid gap-8 md:grid-cols-3">
+    <Reveal>
+      <SectionHeading
+        eyebrow="Your team"
+        title="Built for directors, teachers, and parents"
+        subtitle="Each role gets a tailored experience — web portal and mobile apps included."
+      />
+    </Reveal>
+    <div class="mt-16 space-y-20">
       {
-        roleCards.map((card) => (
-          <article id={card.id} class:list={['feature-card flex flex-col scroll-mt-28', card.accent]}>
-            <div class="feature-icon-wrap">
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
-                <path stroke-linecap="round" stroke-linejoin="round" d={card.icon} />
-              </svg>
-            </div>
-            <span class="audience-tag mb-3 w-fit">{card.tag}</span>
-            <h3 class="text-xl font-bold text-caira-navy">{card.title}</h3>
-            <p class="mt-3 flex-1 text-sm leading-relaxed text-caira-navy/75">{card.body}</p>
-            <ul class="mt-5 space-y-2.5 border-t border-caira-navy/10 pt-5">
-              {card.bullets.map((b) => (
-                <li class="flex items-start gap-2.5 text-sm text-caira-navy/85">
-                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-caira-teal" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                  {b}
-                </li>
-              ))}
-            </ul>
-          </article>
+        roleCards.map((card, i) => (
+          <RoleBlock
+            id={card.id}
+            tag={card.tag}
+            accent={card.accent}
+            icon={card.icon}
+            title={card.title}
+            body={card.body}
+            bullets={card.bullets}
+            screenshot={card.screenshot}
+            screenshotAlt={card.screenshotAlt}
+            frame={card.frame}
+            reverse={i % 2 === 1}
+          />
         ))
       }
     </div>
@@ -205,51 +341,74 @@ const compareRows = [
   <!-- Classroom AI -->
   <section id="classroom" class="scroll-mt-24 bg-gradient-to-b from-caira-mint/25 to-caira-paper">
     <div class="section-pad">
-      <SectionHeading
-        eyebrow="Classroom intelligence"
-        title="Capture naturally. Structure intelligently."
-        subtitle="Voice, photo, or text — Caira drafts enrichment; teachers approve; families receive warm narratives."
-      />
-      <div class="mt-14 grid gap-6 md:grid-cols-3">
+      <Reveal>
+        <SectionHeading
+          eyebrow="Classroom intelligence"
+          title="Capture naturally. Structure intelligently."
+          subtitle="Voice, photo, or text — Caira drafts enrichment; teachers approve; families receive warm narratives."
+        />
+      </Reveal>
+      <div class="mt-14 grid gap-10 md:grid-cols-3" data-reveal-stagger>
         {
-          classroomFeatures.map((f) => (
-            <article class="feature-card bg-white/90">
-              <div class="feature-icon-wrap">
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
-                  <path stroke-linecap="round" stroke-linejoin="round" d={f.icon} />
-                </svg>
+          classroomFeatures.map((f, i) => (
+            <Reveal delay={i * 0.08}>
+              <div class="flex flex-col items-center">
+                <article class="feature-card w-full bg-white/90">
+                  <div class="feature-icon-wrap">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                      <path stroke-linecap="round" stroke-linejoin="round" d={f.icon} />
+                    </svg>
+                  </div>
+                  <h3 class="text-lg font-bold text-caira-navy">{f.title}</h3>
+                  <p class="mt-3 text-sm leading-relaxed text-caira-navy/75">{f.body}</p>
+                </article>
+                <DeviceFrame
+                  src={f.screenshot}
+                  alt={f.screenshotAlt}
+                  class="mt-8 w-full max-w-[220px] shadow-glass sm:max-w-[240px]"
+                />
               </div>
-              <h3 class="text-lg font-bold text-caira-navy">{f.title}</h3>
-              <p class="mt-3 text-sm leading-relaxed text-caira-navy/75">{f.body}</p>
-            </article>
+            </Reveal>
           ))
         }
-      </div>
-
-      <div class="mt-16">
-        <NarrativeQuote />
       </div>
     </div>
   </section>
 
+  <!-- Parent story spotlight -->
+  <SpotlightSection>
+    <div class="section-pad">
+      <Reveal>
+        <NarrativeQuote
+          storyImage={screenshots.parentStory}
+          storyAlt="Caira parent daily story for Mia Rodriguez"
+        />
+      </Reveal>
+    </div>
+  </SpotlightSection>
+
   <!-- Compare -->
   <section class="section-pad border-y border-caira-navy/10 bg-white">
-    <SectionHeading
-      eyebrow="Not another billing app"
-      title="Administrative-first vs. developmental intelligence-first"
-      subtitle="Legacy tools were built for enrollment and payments. Caira was built for what happens in the classroom."
-    />
-    <div class="mx-auto mt-12 max-w-3xl overflow-hidden rounded-2xl border border-caira-navy/10 shadow-sm">
+    <Reveal>
+      <SectionHeading
+        eyebrow="Not another billing app"
+        title="Administrative-first vs. developmental intelligence-first"
+        subtitle="Legacy tools were built for enrollment and payments. Caira was built for what happens in the classroom."
+      />
+    </Reveal>
+    <div class="mx-auto mt-12 max-w-3xl overflow-hidden rounded-2xl border border-caira-navy/10 shadow-glass" data-reveal-stagger>
       <div class="grid grid-cols-2 bg-caira-navy/5 text-center text-xs font-bold uppercase tracking-widest text-caira-navy/50">
         <p class="border-r border-caira-navy/10 px-4 py-3">Typical software</p>
         <p class="px-4 py-3 text-caira-teal">Caira</p>
       </div>
       {
-        compareRows.map((row) => (
-          <div class="grid grid-cols-2 border-t border-caira-navy/10">
-            <p class="border-r border-caira-navy/10 px-4 py-4 text-sm text-caira-navy/55">{row.legacy}</p>
-            <p class="compare-row-highlight px-4 py-4 text-sm font-medium text-caira-navy">{row.caira}</p>
-          </div>
+        compareRows.map((row, i) => (
+          <Reveal delay={i * 0.06}>
+            <div class="grid grid-cols-2 border-t border-caira-navy/10">
+              <p class="border-r border-caira-navy/10 px-4 py-4 text-sm text-caira-navy/55">{row.legacy}</p>
+              <p class="compare-row-highlight px-4 py-4 text-sm font-medium text-caira-navy">{row.caira}</p>
+            </div>
+          </Reveal>
         ))
       }
     </div>
@@ -257,46 +416,79 @@ const compareRows = [
 
   <!-- Operations -->
   <section id="features" class="section-pad scroll-mt-24">
-    <SectionHeading
-      eyebrow="Center operations"
-      title="Planning that speaks licensing & reimbursement"
-      subtitle="AI-assisted lesson and meal plans — always reviewed by your team before they go live."
-    />
+    <Reveal>
+      <SectionHeading
+        eyebrow="Center operations"
+        title="Planning that speaks licensing & reimbursement"
+        subtitle="AI-assisted lesson and meal plans — always reviewed by your team before they go live."
+      />
+    </Reveal>
     <div class="mt-14 grid gap-8 lg:grid-cols-2">
       {
-        operationsFeatures.map((f) => (
-          <article class="bento-card">
-            <div class="relative">
-              <div class="feature-icon-wrap">
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
-                  <path stroke-linecap="round" stroke-linejoin="round" d={f.icon} />
-                </svg>
+        operationsFeatures.map((f, i) => (
+          <Reveal delay={i * 0.1}>
+            <article class="bento-card">
+              <div class="relative">
+                <div class="feature-icon-wrap">
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                    <path stroke-linecap="round" stroke-linejoin="round" d={f.icon} />
+                  </svg>
+                </div>
+                <p class="text-xs font-bold uppercase tracking-widest text-caira-teal">{f.subtitle}</p>
+                <h3 class="mt-2 text-2xl font-bold text-caira-navy">{f.title}</h3>
+                <p class="mt-4 max-w-md text-base leading-relaxed text-caira-navy/75">{f.body}</p>
               </div>
-              <p class="text-xs font-bold uppercase tracking-widest text-caira-teal">{f.subtitle}</p>
-              <h3 class="mt-2 text-2xl font-bold text-caira-navy">{f.title}</h3>
-              <p class="mt-4 max-w-md text-base leading-relaxed text-caira-navy/75">{f.body}</p>
-            </div>
-          </article>
+            </article>
+          </Reveal>
         ))
       }
     </div>
+    <div class="mt-12 grid gap-8 lg:grid-cols-2">
+      <Reveal delay={0.1}>
+        <BrowserFrame
+          src={screenshots.lessonPlans}
+          alt="Caira lesson planner with AI lesson pool"
+          class="shadow-glass"
+        />
+      </Reveal>
+      <Reveal delay={0.15}>
+        <BrowserFrame
+          src={screenshots.mealPlans}
+          alt="Caira CACFP meal plans with Chef Caira AI"
+          class="shadow-glass"
+        />
+      </Reveal>
+    </div>
+    <Reveal delay={0.2}>
+      <div class="mt-12">
+        <ScreenshotShowcase
+          src={screenshots.learningManager}
+          alt="Caira Learning Manager weekly direction"
+          caption="Learning Manager — set the weekly theme, objectives, and room plans from one place."
+        />
+      </div>
+    </Reveal>
   </section>
 
   <!-- Differentiators -->
-  <section class="border-y border-caira-navy/10 bg-white">
+  <section class="border-y border-caira-navy/10 bg-caira-paper">
     <div class="section-pad">
-      <SectionHeading
-        eyebrow="Why Caira"
-        title="Purpose-built for licensed childcare"
-        subtitle="Developmental intelligence-first — not repurposed business software."
-      />
-      <div class="mt-14 grid gap-5 sm:grid-cols-2">
+      <Reveal>
+        <SectionHeading
+          eyebrow="Why Caira"
+          title="Purpose-built for licensed childcare"
+          subtitle="Developmental intelligence-first — not repurposed business software."
+        />
+      </Reveal>
+      <div class="mt-14 grid gap-5 sm:grid-cols-2" data-reveal-stagger>
         {
           differentiators.map((d, i) => (
-            <article class:list={['rounded-2xl p-6', i % 2 === 0 ? 'bg-caira-paper' : 'bg-caira-mint/20']}>
-              <h3 class="text-lg font-bold text-caira-navy">{d.title}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-caira-navy/75">{d.body}</p>
-            </article>
+            <Reveal delay={i * 0.06}>
+              <article class:list={['glass-card p-6', i % 2 === 0 ? 'bg-white/90' : 'bg-caira-mint/20']}>
+                <h3 class="text-lg font-bold text-caira-navy">{d.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-caira-navy/75">{d.body}</p>
+              </article>
+            </Reveal>
           ))
         }
       </div>
@@ -307,63 +499,41 @@ const compareRows = [
 
   <!-- How it works -->
   <section class="section-pad">
-    <SectionHeading
-      eyebrow="Pilot program"
-      title="From signup to connected families"
-      subtitle="We onboard a limited cohort of centers with hands-on support."
-    />
-    <ol class="relative mt-16 grid gap-10 md:grid-cols-3 md:gap-6">
+    <Reveal>
+      <SectionHeading
+        eyebrow="Pilot program"
+        title="From signup to connected families"
+        subtitle="We onboard a limited cohort of centers with hands-on support."
+      />
+    </Reveal>
+    <ol class="relative mt-16 grid gap-10 md:grid-cols-3 md:gap-6" data-reveal-stagger>
       <div class="step-line" aria-hidden="true"></div>
       {
-        steps.map((s) => (
-          <li class="relative text-center">
-            <span class="relative z-10 mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-caira-teal to-caira-cyan text-sm font-bold text-white shadow-lg shadow-caira-teal/30">
-              {s.step}
-            </span>
-            <h3 class="mt-5 text-lg font-bold text-caira-navy">{s.title}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-caira-navy/70">{s.body}</p>
-          </li>
+        steps.map((s, i) => (
+          <li class="reveal relative text-center" data-reveal data-reveal-delay={i * 0.1}>
+              <span class="relative z-10 mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-caira-teal to-caira-cyan text-sm font-bold text-white shadow-lg shadow-caira-teal/30">
+                {s.step}
+              </span>
+              <h3 class="mt-5 text-lg font-bold text-caira-navy">{s.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-caira-navy/70">{s.body}</p>
+            </li>
         ))
       }
     </ol>
   </section>
 
-  <!-- Pilot CTA -->
-  <section id="pilot" class="scroll-mt-24 bg-gradient-to-br from-caira-teal/10 via-caira-mint/30 to-caira-cyan/10">
-    <div class="section-pad">
-      <div class="pilot-card relative mx-auto max-w-3xl">
-        <div class="relative z-10">
-          <p class="section-eyebrow mb-4">Georgia & beyond</p>
-          <h2 class="text-3xl font-bold text-caira-navy md:text-4xl">Join the Caira pilot</h2>
-          <p class="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-caira-navy/75">
-            Partner with us for dedicated onboarding, priority support, and a voice in the product
-            roadmap — while your team keeps human care at the center.
-          </p>
-          <a
-            href="mailto:support@caira.care?subject=Caira%20pilot%20inquiry"
-            class="btn-primary mt-8 inline-flex"
-          >
-            Email support@caira.care
-          </a>
-          <p class="mt-4 text-sm text-caira-navy/55">
-            Include your center name, location, and number of classrooms. We respond within one business day.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <FinalCTA />
 
   <!-- Contact -->
   <section id="contact" class="section-pad border-t border-caira-navy/10">
-    <div class="mx-auto max-w-xl text-center">
-      <SectionHeading title="Get in touch" subtitle="Questions about Caira, partnerships, or the pilot program." />
-      <div class="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-        <a href="mailto:support@caira.care" class="btn-primary">support@caira.care</a>
-        <a href="https://app.caira.care/sign-in" class="btn-secondary">Sign in to portal</a>
+    <Reveal>
+      <div class="mx-auto max-w-xl text-center">
+        <SectionHeading title="Get in touch" subtitle="Questions about Caira, partnerships, or the pilot program." />
+        <div class="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+          <a href="mailto:support@caira.care" class="btn-primary">support@caira.care</a>
+          <a href="https://app.caira.care/sign-in" class="btn-secondary">Sign in to portal</a>
+        </div>
       </div>
-      <p class="mt-6 text-sm text-caira-navy/50">
-        Armitive LLC · Early childhood centers · Georgia, United States
-      </p>
-    </div>
+    </Reveal>
   </section>
 </BaseLayout>

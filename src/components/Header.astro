@@ -1,42 +1,91 @@
 ---
 const navLinks = [
-  { href: '/#directors', label: 'Directors' },
-  { href: '/#teachers', label: 'Teachers' },
-  { href: '/#parents', label: 'Parents' },
-  { href: '/#classroom', label: 'Features' },
-  { href: '/#security', label: 'Security' },
+  { href: '/#directors', label: 'Directors', section: 'directors' },
+  { href: '/#teachers', label: 'Teachers', section: 'teachers' },
+  { href: '/#parents', label: 'Parents', section: 'parents' },
+  { href: '/#classroom', label: 'Features', section: 'classroom' },
+  { href: '/#security', label: 'Security', section: 'security' },
 ];
+
+const pathname = Astro.url.pathname;
+const isHome = pathname === '/' || pathname === '';
 ---
 
-<header class="sticky top-0 z-50 border-b border-caira-navy/10 bg-caira-paper/80 backdrop-blur-md">
-  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
-    <a href="/" class="flex shrink-0 items-center gap-3">
-      <img src="/logo.png" alt="Caira" class="h-9 w-auto" width="120" height="36" />
+<header
+  data-site-header
+  class="site-header sticky top-0 z-50 border-b border-transparent bg-caira-paper/75 backdrop-blur-lg transition duration-300"
+>
+  <div class="site-header-inner mx-auto max-w-site px-4 sm:px-6">
+    <a href="/" class="site-header-logo flex shrink-0 items-center" aria-label="Caira home">
+      <img src="/logo.png" alt="" class="h-8 w-auto sm:h-9" width="120" height="36" />
     </a>
 
-    <nav class="hidden items-center gap-6 lg:flex" aria-label="Main">
+    <nav class="site-header-nav hidden lg:flex" aria-label="Main">
+      <ul class="site-nav-pill flex items-center gap-0.5 p-1">
+        {
+          navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="nav-link"
+                data-nav-link
+                data-section={link.section}
+                aria-current={isHome ? undefined : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="site-header-actions flex items-center gap-2 sm:gap-3">
+      <a href="https://app.caira.care/sign-in" class="btn-ghost hidden sm:inline-flex">
+        Sign in
+      </a>
+      <a href="/#pilot" class="btn-primary hidden whitespace-nowrap px-4 py-2.5 text-xs sm:inline-flex sm:px-5 sm:text-sm">
+        Ask about pilot
+      </a>
+      <button
+        type="button"
+        data-nav-toggle
+        class="nav-toggle lg:hidden"
+        aria-expanded="false"
+        aria-controls="site-nav-menu"
+        aria-label="Open menu"
+      >
+        <svg class="nav-toggle-open h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg class="nav-toggle-close h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div data-nav-backdrop class="site-nav-backdrop lg:hidden" hidden></div>
+
+  <nav
+    id="site-nav-menu"
+    data-nav-menu
+    class="site-nav-drawer lg:hidden"
+    aria-label="Mobile"
+    hidden
+  >
+    <div class="site-nav-drawer-inner">
       {
         navLinks.map((link) => (
-          <a
-            href={link.href}
-            class="text-sm font-medium text-caira-navy/80 transition hover:text-caira-teal"
-          >
+          <a href={link.href} class="nav-link nav-link-drawer" data-nav-link data-section={link.section}>
             {link.label}
           </a>
         ))
       }
-    </nav>
-
-    <div class="flex items-center gap-2 sm:gap-3">
-      <a
-        href="https://app.caira.care"
-        class="hidden text-sm font-medium text-caira-navy/80 transition hover:text-caira-teal lg:inline"
-      >
-        Sign in to app.caira.care
-      </a>
-      <a href="/#pilot" class="btn-primary whitespace-nowrap text-xs sm:text-sm">
-        Ask about pilot
-      </a>
+      <div class="mt-4 flex flex-col gap-2 border-t border-caira-navy/10 pt-4">
+        <a href="https://app.caira.care/sign-in" class="btn-secondary w-full justify-center">Sign in to portal</a>
+        <a href="/#pilot" class="btn-primary w-full justify-center">Ask about pilot</a>
+      </div>
     </div>
-  </div>
+  </nav>
 </header>

@@ -1,0 +1,36 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  url?: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
+}
+
+const {
+  src,
+  alt,
+  url = 'app.caira.care',
+  class: className = '',
+  loading = 'lazy',
+  fetchpriority,
+} = Astro.props;
+---
+
+<div class:list={['browser-frame', className]}>
+  <div class="browser-chrome">
+    <span class="browser-dot bg-caira-coral/80"></span>
+    <span class="browser-dot bg-caira-mint"></span>
+    <span class="browser-dot bg-caira-cyan"></span>
+    <span class="ml-3 flex-1 truncate rounded-md bg-white px-3 py-1 text-xs text-caira-navy/50">{url}</span>
+  </div>
+  <img
+    src={src}
+    alt={alt}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    decoding="async"
+    class="w-full"
+  />
+</div>

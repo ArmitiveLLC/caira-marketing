@@ -1,0 +1,23 @@
+---
+interface Props {
+  items: string[];
+}
+
+const { items } = Astro.props;
+const doubled = [...items, ...items];
+---
+
+<div class="relative overflow-hidden border-y border-caira-navy/10 bg-white/60 py-4 backdrop-blur-sm">
+  <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-caira-paper to-transparent"></div>
+  <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-caira-paper to-transparent"></div>
+  <div class="marquee-track" aria-hidden="true">
+    {
+      doubled.map((item) => (
+        <span class="marquee-item">
+          <span class="h-1.5 w-1.5 rounded-full bg-caira-teal"></span>
+          {item}
+        </span>
+      ))
+    }
+  </div>
+</div>

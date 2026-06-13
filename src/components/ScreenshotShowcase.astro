@@ -1,0 +1,16 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  class?: string;
+}
+
+const { src, alt, caption, class: className = '' } = Astro.props;
+---
+
+<figure class:list={['screenshot-showcase', className]} data-lightbox={src} data-lightbox-alt={alt}>
+  <img src={src} alt={alt} loading="lazy" decoding="async" />
+  <span class="screenshot-badge">Click to enlarge</span>
+  {caption && <figcaption class="px-4 py-3 text-sm text-caira-navy/60">{caption}</figcaption>}
+</figure>

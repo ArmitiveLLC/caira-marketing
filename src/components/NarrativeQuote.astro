@@ -1,38 +1,35 @@
 ---
-/** Pull-quote style parent narrative preview */
+import DeviceFrame from './DeviceFrame.astro';
+
+interface Props {
+  storyImage?: string;
+  storyAlt?: string;
+}
+
+const {
+  storyImage = '/screenshots/app-parent-daily-story.png',
+  storyAlt = "Caira parent's daily story narrative",
+} = Astro.props;
 ---
 
 <aside class="narrative-quote relative overflow-hidden rounded-3xl bg-caira-navy px-8 py-10 text-white md:px-12 md:py-14">
   <div class="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-caira-cyan/20 blur-3xl" aria-hidden="true"></div>
   <div class="pointer-events-none absolute -bottom-12 -left-8 h-40 w-40 rounded-full bg-caira-teal/25 blur-3xl" aria-hidden="true"></div>
 
-  <div class="relative grid gap-8 lg:grid-cols-[1fr,auto] lg:items-center lg:gap-12">
+  <div class="relative grid gap-10 lg:grid-cols-[1fr,auto] lg:items-center lg:gap-14">
     <div>
       <p class="text-xs font-bold uppercase tracking-[0.2em] text-caira-cyan">What parents receive</p>
       <blockquote class="ai-sample mt-4 text-xl leading-relaxed text-white/95 md:text-2xl">
-        "Mia had a wonderful afternoon exploring sensory play. She described the texture of
-        sand as 'crunchy' and invited a friend to build alongside her — a lovely step in
-        social-emotional growth aligned with this week's GELDS strand."
+        "Mia had a fantastic day full of fun and discovery! It was so exciting to see her vocabulary
+        grow during story time — putting three words together to express what she needs."
       </blockquote>
       <p class="mt-5 text-sm text-white/55">
         AI-generated daily narrative · reviewed by staff · tied to approved observations
       </p>
     </div>
 
-    <div class="flex shrink-0 flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
-      <div class="flex items-center gap-3">
-        <span class="flex h-10 w-10 items-center justify-center rounded-full bg-caira-teal text-sm font-bold text-white">
-          M
-        </span>
-        <div>
-          <p class="text-sm font-semibold">Mia's family</p>
-          <p class="text-xs text-white/50">Preschool · Tuesday 6:42 PM</p>
-        </div>
-      </div>
-      <div class="flex gap-2">
-        <span class="rounded-full bg-caira-teal/30 px-3 py-1 text-xs font-medium text-caira-mint">Daily story</span>
-        <span class="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white/70">GELDS-linked</span>
-      </div>
+    <div class="flex justify-center lg:justify-end">
+      <DeviceFrame src={storyImage} alt={storyAlt} class="w-full max-w-[240px] shadow-glow-teal" />
     </div>
   </div>
 </aside>

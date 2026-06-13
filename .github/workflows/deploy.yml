@@ -30,7 +30,11 @@ jobs:
       - name: Build site
         run: npm run build
 
-      - name: Deploy to Firebase Hosting (caira-care-eaf48 site)
-        run: npx firebase deploy --only hosting:caira-care-eaf48 --project caira-prod --non-interactive
+      - name: Install function dependencies
+        run: npm ci
+        working-directory: functions
+
+      - name: Deploy to Firebase (hosting + pilot API)
+        run: npx firebase deploy --only hosting:caira-care-eaf48,functions:pilotRequest --project caira-prod --non-interactive
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

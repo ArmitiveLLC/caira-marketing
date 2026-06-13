@@ -1,27 +1,74 @@
 ---
-const footerLinks = [
+import ArmitiveBadge from './ArmitiveBadge.astro';
+
+const productLinks = [
+  { href: '/#directors', label: 'Directors' },
+  { href: '/#teachers', label: 'Teachers' },
+  { href: '/#parents', label: 'Parents' },
+  { href: '/#security', label: 'Security' },
+];
+
+const legalLinks = [
   { href: '/privacy', label: 'Privacy' },
   { href: '/support', label: 'Support' },
   { href: '/terms', label: 'Terms' },
-  { href: 'https://app.caira.care', label: 'Sign in', external: true },
 ];
 ---
 
 <footer class="border-t border-caira-navy/10 bg-white">
-  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 sm:flex-row">
-    <p class="text-sm text-caira-navy/60">&copy; {new Date().getFullYear()} Caira</p>
-    <nav class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2" aria-label="Footer">
-      {
-        footerLinks.map((link) => (
+  <div class="section-pad pb-10 pt-12">
+    <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+      <div class="lg:col-span-2">
+        <img src="/logo.png" alt="Caira" class="h-8 w-auto" width="100" height="32" />
+        <p class="mt-4 max-w-sm text-sm leading-relaxed text-caira-navy/65">
+          The AI co-pilot for licensed childcare centers. Less paperwork, more presence in the classroom.
+        </p>
+        <div class="mt-6">
+          <ArmitiveBadge />
+        </div>
+      </div>
+
+      <div>
+        <p class="eyebrow-mono mb-4">Product</p>
+        <nav class="flex flex-col gap-2" aria-label="Product links">
+          {
+            productLinks.map((link) => (
+              <a href={link.href} class="text-sm text-caira-navy/70 transition hover:text-caira-teal">
+                {link.label}
+              </a>
+            ))
+          }
           <a
-            href={link.href}
+            href="https://app.caira.care"
             class="text-sm text-caira-navy/70 transition hover:text-caira-teal"
-            {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            {link.label}
+            Sign in to portal
           </a>
-        ))
-      }
-    </nav>
+        </nav>
+      </div>
+
+      <div>
+        <p class="eyebrow-mono mb-4">Legal & support</p>
+        <nav class="flex flex-col gap-2" aria-label="Legal links">
+          {
+            legalLinks.map((link) => (
+              <a href={link.href} class="text-sm text-caira-navy/70 transition hover:text-caira-teal">
+                {link.label}
+              </a>
+            ))
+          }
+          <a href="mailto:support@caira.care" class="text-sm text-caira-navy/70 transition hover:text-caira-teal">
+            support@caira.care
+          </a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="mt-10 flex flex-col items-center justify-between gap-4 border-t border-caira-navy/10 pt-8 sm:flex-row">
+      <p class="text-sm text-caira-navy/50">&copy; {new Date().getFullYear()} Caira · Armitive LLC</p>
+      <p class="text-xs text-caira-navy/45">Early childhood centers · Georgia, United States</p>
+    </div>
   </div>
 </footer>

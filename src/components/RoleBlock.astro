@@ -1,0 +1,83 @@
+---
+import BrowserFrame from './BrowserFrame.astro';
+import DeviceFrame from './DeviceFrame.astro';
+import ScreenshotShowcase from './ScreenshotShowcase.astro';
+import Reveal from './Reveal.astro';
+
+interface Props {
+  id: string;
+  tag: string;
+  accent: string;
+  icon: string;
+  title: string;
+  body: string;
+  bullets: string[];
+  screenshot: string;
+  screenshotAlt: string;
+  reverse?: boolean;
+  frame?: 'browser' | 'device' | 'showcase';
+}
+
+const {
+  id,
+  tag,
+  accent,
+  icon,
+  title,
+  body,
+  bullets,
+  screenshot,
+  screenshotAlt,
+  reverse = false,
+  frame = 'browser',
+} = Astro.props;
+---
+
+<article id={id} class="scroll-mt-28">
+  <div
+    class:list={[
+      'grid items-center gap-10 lg:grid-cols-2 lg:gap-16',
+      reverse && 'lg:[&>*:first-child]:order-2',
+    ]}
+    data-reveal-stagger
+  >
+    <Reveal direction={reverse ? 'right' : 'left'}>
+      <div class:list={['feature-card flex flex-col', accent]}>
+        <div class="feature-icon-wrap">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+            <path stroke-linecap="round" stroke-linejoin="round" d={icon} />
+          </svg>
+        </div>
+        <span class="audience-tag mb-3 w-fit">{tag}</span>
+        <h3 class="text-2xl font-bold text-caira-navy">{title}</h3>
+        <p class="mt-3 text-base leading-relaxed text-caira-navy/75">{body}</p>
+        <ul class="mt-5 space-y-2.5 border-t border-caira-navy/10 pt-5">
+          {
+            bullets.map((b) => (
+              <li class="flex items-start gap-2.5 text-sm text-caira-navy/85">
+                <svg class="mt-0.5 h-4 w-4 shrink-0 text-caira-teal" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                {b}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </Reveal>
+
+    <Reveal direction={reverse ? 'left' : 'right'} delay={0.1}>
+      <div class="flex justify-center">
+        {
+          frame === 'device' ? (
+            <DeviceFrame src={screenshot} alt={screenshotAlt} class="w-full max-w-xs shadow-glow-teal" />
+          ) : frame === 'browser' ? (
+            <BrowserFrame src={screenshot} alt={screenshotAlt} class="w-full max-w-xl shadow-glass" />
+          ) : (
+            <ScreenshotShowcase src={screenshot} alt={screenshotAlt} />
+          )
+        }
+      </div>
+    </Reveal>
+  </div>
+</article>

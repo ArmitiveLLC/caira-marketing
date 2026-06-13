@@ -1,4 +1,6 @@
 ---
+import Reveal from './Reveal.astro';
+
 const infraItems = [
   {
     title: 'Google Cloud Platform',
@@ -46,82 +48,88 @@ const compliancePills = [
 ];
 ---
 
-<section id="security" class="scroll-mt-24 border-y border-caira-navy/10 bg-caira-navy text-white">
+<section id="security" class="spotlight-dark scroll-mt-24 border-y border-caira-navy/10">
   <div class="section-pad">
-    <div class="mx-auto max-w-2xl text-center">
-      <p class="section-eyebrow-light mb-3">Enterprise SaaS</p>
-      <h2 class="text-3xl font-bold tracking-tight md:text-4xl">
-        Production infrastructure. Privacy by design.
-      </h2>
-      <p class="mt-4 text-lg leading-relaxed text-white/75">
-        Caira is a cloud-hosted platform for licensed childcare — not a spreadsheet with an AI chatbot
-        bolted on. Security, tenant isolation, and compliance workflows are part of the product.
-      </p>
-    </div>
+    <Reveal>
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="section-eyebrow-light mb-3">Enterprise SaaS</p>
+        <h2 class="text-3xl font-bold tracking-tight md:text-4xl">
+          Production infrastructure. Privacy by design.
+        </h2>
+        <p class="mt-4 text-lg leading-relaxed text-white/75">
+          Caira is a cloud-hosted platform for licensed childcare — not a spreadsheet with an AI chatbot
+          bolted on. Security, tenant isolation, and compliance workflows are part of the product.
+        </p>
+      </div>
+    </Reveal>
 
-    <div class="mt-14 grid gap-6 sm:grid-cols-2">
+    <div class="mt-14 grid gap-6 sm:grid-cols-2" data-reveal-stagger>
       {
-        infraItems.map((item) => (
-          <article class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:bg-white/10">
-            <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-caira-teal/30 text-caira-cyan">
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
-                <path stroke-linecap="round" stroke-linejoin="round" d={item.icon} />
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold">{item.title}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-white/70">{item.body}</p>
-          </article>
+        infraItems.map((item, i) => (
+          <Reveal delay={i * 0.05}>
+            <article class="glass-card-dark p-6 transition hover:bg-white/10">
+              <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-caira-teal/30 text-caira-cyan">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                  <path stroke-linecap="round" stroke-linejoin="round" d={item.icon} />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold">{item.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-white/70">{item.body}</p>
+            </article>
+          </Reveal>
         ))
       }
     </div>
 
-    <div class="security-ai-panel relative mt-14 overflow-hidden rounded-3xl border border-caira-cyan/25 bg-white/5 p-8 md:p-10">
-      <div class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-caira-cyan/15 blur-3xl" aria-hidden="true"></div>
+    <Reveal delay={0.15}>
+      <div class="security-ai-panel relative mt-14 overflow-hidden rounded-3xl border border-caira-cyan/25 bg-white/5 p-8 md:p-10">
+        <div class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-caira-cyan/15 blur-3xl" aria-hidden="true"></div>
 
-      <div class="relative grid gap-10 lg:grid-cols-[1fr,1.1fr] lg:items-center">
-        <div>
-          <p class="text-xs font-bold uppercase tracking-[0.2em] text-caira-cyan">AI privacy gate</p>
-          <h3 class="mt-3 text-2xl font-bold md:text-3xl">
-            Personal information does not reach AI models in the clear
-          </h3>
-          <p class="mt-4 text-sm leading-relaxed text-white/70 md:text-base">
-            Every AI request passes through a PII scrubbing gate before it leaves Caira. Identifiers
-            are tokenized or removed; only classroom observations needed for drafting logs and narratives
-            are sent — and always under staff review before parents receive anything.
-          </p>
-          <div class="mt-6 flex flex-wrap gap-2">
-            {compliancePills.map((pill) => (
-              <span class="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-medium text-white/80">
-                {pill}
-              </span>
-            ))}
+        <div class="relative grid gap-10 lg:grid-cols-[1fr,1.1fr] lg:items-center">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-caira-cyan">AI privacy gate</p>
+            <h3 class="mt-3 text-2xl font-bold md:text-3xl">
+              Personal information does not reach AI models in the clear
+            </h3>
+            <p class="mt-4 text-sm leading-relaxed text-white/70 md:text-base">
+              Every AI request passes through a PII scrubbing gate before it leaves Caira. Identifiers
+              are tokenized or removed; only classroom observations needed for drafting logs and narratives
+              are sent — and always under staff review before parents receive anything.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-2">
+              {compliancePills.map((pill) => (
+                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-medium text-white/80">
+                  {pill}
+                </span>
+              ))}
+            </div>
           </div>
+
+          <ol class="relative space-y-4">
+            {
+              aiPrivacySteps.map((step, i) => (
+                <li class="security-ai-step flex gap-4 rounded-2xl border border-white/10 bg-caira-navy/60 p-5">
+                  <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-caira-teal text-sm font-bold text-white">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <p class="text-xs font-bold uppercase tracking-widest text-caira-cyan">{step.label}</p>
+                    <p class="mt-1 text-sm leading-relaxed text-white/85">{step.text}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
         </div>
 
-        <ol class="relative space-y-4">
-          {
-            aiPrivacySteps.map((step, i) => (
-              <li class="security-ai-step flex gap-4 rounded-2xl border border-white/10 bg-caira-navy/60 p-5">
-                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-caira-teal text-sm font-bold text-white">
-                  {i + 1}
-                </span>
-                <div>
-                  <p class="text-xs font-bold uppercase tracking-widest text-caira-cyan">{step.label}</p>
-                  <p class="mt-1 text-sm leading-relaxed text-white/85">{step.text}</p>
-                </div>
-              </li>
-            ))
-          }
-        </ol>
+        <p class="relative mt-8 text-center text-sm text-white/50">
+          Read our full practices in the{' '}
+          <a href="/privacy" class="font-medium text-caira-cyan underline-offset-2 hover:underline">
+            Privacy Policy
+          </a>
+          .
+        </p>
       </div>
-
-      <p class="relative mt-8 text-center text-sm text-white/50">
-        Read our full practices in the{' '}
-        <a href="/privacy" class="font-medium text-caira-cyan underline-offset-2 hover:underline">
-          Privacy Policy
-        </a>
-        .
-      </p>
-    </div>
+    </Reveal>
   </div>
 </section>

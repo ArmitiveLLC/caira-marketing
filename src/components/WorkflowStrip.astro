@@ -31,7 +31,7 @@ const steps = [
 ];
 ---
 
-<div class="workflow-strip relative overflow-hidden rounded-3xl border border-caira-navy/10 bg-white p-6 shadow-xl shadow-caira-navy/5 md:p-10">
+<div class="workflow-strip glass-card relative overflow-hidden p-6 md:p-10">
   <div class="pointer-events-none absolute -left-20 top-0 h-40 w-40 rounded-full bg-caira-mint/40 blur-3xl" aria-hidden="true"></div>
   <div class="pointer-events-none absolute -right-16 bottom-0 h-48 w-48 rounded-full bg-caira-cyan/20 blur-3xl" aria-hidden="true"></div>
 
@@ -42,10 +42,10 @@ const steps = [
     From classroom moment to parent story — in one flow
   </p>
 
-  <ol class="relative mt-10 grid gap-6 md:grid-cols-4 md:gap-4">
+  <ol class="relative mt-10 grid gap-6 md:grid-cols-4 md:gap-4" data-reveal-stagger>
     {
       steps.map((step, i) => (
-        <li class="workflow-step relative flex flex-col items-center text-center">
+        <li class="workflow-step reveal relative flex flex-col items-center text-center" data-reveal data-reveal-delay={i * 0.08}>
           {i < steps.length - 1 && (
             <span
               class="workflow-connector hidden md:block"

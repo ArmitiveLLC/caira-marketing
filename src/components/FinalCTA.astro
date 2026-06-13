@@ -1,0 +1,35 @@
+---
+import Reveal from './Reveal.astro';
+import PilotForm from './PilotForm.astro';
+import { pilotContactEmail } from '../lib/pilot-api';
+---
+
+<section id="pilot" class="scroll-mt-24 aurora-cta relative overflow-hidden border-t border-caira-navy/10">
+  <div class="pointer-events-none absolute -right-20 top-0 h-64 w-64 rounded-full bg-caira-cyan/20 blur-3xl" aria-hidden="true"></div>
+  <div class="section-pad relative">
+    <Reveal>
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="section-eyebrow mb-4">Georgia & beyond</p>
+        <h2 class="text-3xl font-bold text-caira-navy md:text-4xl lg:text-5xl">
+          Join the <span class="text-gradient">Caira pilot</span>
+        </h2>
+        <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-caira-navy/75">
+          Partner with us for dedicated onboarding, priority support, and a voice in the product
+          roadmap — while your team keeps human care at the center.
+        </p>
+      </div>
+    </Reveal>
+    <Reveal delay={0.1}>
+      <div class="mt-10">
+        <PilotForm />
+      </div>
+    </Reveal>
+    <p class="mt-6 text-center text-sm text-caira-navy/55">
+      Prefer email? Reach us at{' '}
+      <a href={`mailto:${pilotContactEmail}?subject=Caira%20pilot%20inquiry`} class="text-caira-teal hover:underline">
+        {pilotContactEmail}
+      </a>
+      — we respond within one business day.
+    </p>
+  </div>
+</section>
