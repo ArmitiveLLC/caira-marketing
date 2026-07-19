@@ -19,7 +19,7 @@
   }
 
   body {
-    @apply bg-caira-paper text-caira-navy font-sans antialiased;
+    @apply bg-caira-canvas text-caira-navy font-sans antialiased;
   }
 
   h1,
@@ -45,7 +45,7 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-caira bg-caira-teal px-6 py-3 text-sm font-semibold text-white shadow-md shadow-caira-teal/25 transition duration-300 hover:-translate-y-0.5 hover:bg-caira-teal/90 hover:shadow-glow-teal;
+    @apply inline-flex items-center justify-center gap-2 rounded-caira bg-caira-coral px-6 py-3 text-sm font-semibold text-white shadow-md shadow-caira-coral/25 transition duration-300 hover:-translate-y-0.5 hover:bg-caira-coral/90 hover:shadow-glow-coral;
   }
 
   .btn-secondary {
@@ -125,7 +125,7 @@
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-caira-navy via-caira-teal to-caira-cyan bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-caira-coral via-caira-amber to-caira-teal bg-clip-text text-transparent;
   }
 
   .aurora-warm {

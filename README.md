@@ -130,14 +130,19 @@ Use these when updating store listings, emails, or legal pages.
 
 Replace the iOS App Store ID placeholder once the app is approved. The Android URL works as soon as the listing is published under that package name.
 
-## Brand colors
+## Brand colors (Sunrise v2)
 
-| Name | Hex |
-| ---- | --- |
-| Teal | `#5CA19C` |
-| Navy | `#3C4C6C` |
-| Paper | `#FAFBF9` |
-| Mint | `#B8DCC0` |
+| Name | Hex | Role |
+| ---- | --- | ---- |
+| Coral | `#EE6C4D` | Primary CTA |
+| Amber | `#F4A340` | Gradient mid / accents |
+| Teal | `#45B3A4` | Secondary CTA / links |
+| Navy | `#3C4C6C` | Headings / structure |
+| Ink | `#1A2233` | Body text |
+| Canvas | `#F3EEE6` | Page background |
+| Paper | `#FDFAF6` | Soft fills / alternate light surfaces |
+| Mint | `#B8DCC0` | Soft AI / positive fills |
+| Cyan | `#4CCBC8` | Live / AI pulse |
 
 ## Structure
 
