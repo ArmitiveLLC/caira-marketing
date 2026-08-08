@@ -370,6 +370,14 @@ function initHeroStage() {
   startAuto();
 }
 
+function initNavDropdown() {
+  document.querySelectorAll<HTMLDetailsElement>('.nav-details').forEach((details) => {
+    details.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => details.removeAttribute('open'));
+    });
+  });
+}
+
 function init() {
   initLenis();
   initReveals();
@@ -377,6 +385,7 @@ function init() {
   initLightbox();
   initHeaderScroll();
   initNavActive();
+  initNavDropdown();
   initMobileNav();
   initHeroStage();
 }
