@@ -1,10 +1,15 @@
 ---
 import ArmitiveBadge from './ArmitiveBadge.astro';
+import BrandLogo from './BrandLogo.astro';
 
 const productLinks = [
   { href: '/#directors', label: 'Directors' },
   { href: '/#teachers', label: 'Teachers' },
   { href: '/#parents', label: 'Parents' },
+  { href: '/#communications', label: 'Communications' },
+  { href: '/#classroom', label: 'Features' },
+  { href: '/#ai', label: 'AI system' },
+  { href: '/#safety', label: 'Sign-in & safety' },
   { href: '/#security', label: 'Security' },
 ];
 
@@ -19,9 +24,12 @@ const legalLinks = [
   <div class="section-pad pb-10 pt-12">
     <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
       <div class="lg:col-span-2">
-        <img src="/logo.png" alt="Caira" class="h-8 w-auto" width="100" height="32" />
+        <BrandLogo />
         <p class="mt-4 max-w-sm text-sm leading-relaxed text-caira-navy/65">
-          Care — simplified, connected, intelligent. Built for licensed childcare centers, classrooms, and families.
+          Care — simplified, connected, intelligent. Developmental intelligence for licensed childcare centers — Georgia DECAL, GELDS, and CACFP built in.
+        </p>
+        <p class="mt-2 max-w-sm text-xs leading-relaxed text-caira-navy/50">
+          Cuidado — simplificado, conectado, inteligente.
         </p>
         <div class="mt-6">
           <ArmitiveBadge />

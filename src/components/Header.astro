@@ -1,9 +1,14 @@
 ---
+import BrandLogo from './BrandLogo.astro';
+
 const navLinks = [
   { href: '/#directors', label: 'Directors', section: 'directors' },
   { href: '/#teachers', label: 'Teachers', section: 'teachers' },
   { href: '/#parents', label: 'Parents', section: 'parents' },
+  { href: '/#communications', label: 'Communications', section: 'communications' },
   { href: '/#classroom', label: 'Features', section: 'classroom' },
+  { href: '/#ai', label: 'AI system', section: 'ai' },
+  { href: '/#safety', label: 'Sign-in & safety', section: 'safety' },
   { href: '/#security', label: 'Security', section: 'security' },
 ];
 
@@ -17,7 +22,7 @@ const isHome = pathname === '/' || pathname === '';
 >
   <div class="site-header-inner mx-auto max-w-site px-4 sm:px-6">
     <a href="/" class="site-header-logo flex shrink-0 items-center" aria-label="Caira home">
-      <img src="/logo.png" alt="" class="h-8 w-auto sm:h-9" width="120" height="36" />
+      <BrandLogo />
     </a>
 
     <nav class="site-header-nav hidden lg:flex" aria-label="Main">

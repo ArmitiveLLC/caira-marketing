@@ -20,6 +20,8 @@ export default {
           warning: 'rgb(224 144 11 / <alpha-value>)',
           danger: 'rgb(224 74 63 / <alpha-value>)',
           info: 'rgb(63 169 201 / <alpha-value>)',
+          portalSidebar: 'rgb(15 23 42 / <alpha-value>)',
+          portalActive: 'rgb(16 185 129 / <alpha-value>)',
         },
       },
       animation: {
@@ -39,6 +41,7 @@ export default {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['Montserrat', 'system-ui', 'sans-serif'],
+        heading: ['Montserrat', 'system-ui', 'sans-serif'],
         mono: ['Roboto Mono', 'ui-monospace', 'monospace'],
       },
       borderRadius: {

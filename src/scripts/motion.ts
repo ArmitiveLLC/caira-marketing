@@ -20,6 +20,36 @@ function initLenis() {
   requestAnimationFrame(raf);
 }
 
+function isInViewport(el: HTMLElement): boolean {
+  const rect = el.getBoundingClientRect();
+  return rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+}
+
+function revealElement(el: HTMLElement, observer: IntersectionObserver) {
+  if (el.classList.contains('reveal-in')) return;
+
+  const delay = Number(el.dataset.revealDelay ?? 0);
+  const stagger = el.closest('[data-reveal-stagger]');
+  const siblings = stagger ? Array.from(stagger.querySelectorAll<HTMLElement>('[data-reveal]')) : [el];
+  const index = siblings.indexOf(el);
+  const totalDelay = delay + index * 0.08;
+
+  el.classList.add('reveal-in');
+
+  if (!prefersReducedMotion()) {
+    animate(
+      el,
+      {
+        y: [el.dataset.reveal === 'left' ? 0 : 20, 0],
+        x: [el.dataset.reveal === 'left' ? -20 : el.dataset.reveal === 'right' ? 20 : 0, 0],
+      },
+      { duration: 0.65, delay: totalDelay, easing: [0.22, 1, 0.36, 1] }
+    ).then(() => clearInlineStyles(el));
+  }
+
+  observer.unobserve(el);
+}
+
 function initReveals() {
   const elements = document.querySelectorAll<HTMLElement>('[data-reveal]');
   if (!elements.length) return;
@@ -33,28 +63,19 @@ function initReveals() {
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        const el = entry.target as HTMLElement;
-        const delay = Number(el.dataset.revealDelay ?? 0);
-        const stagger = el.closest('[data-reveal-stagger]');
-        const siblings = stagger
-          ? Array.from(stagger.querySelectorAll('[data-reveal]'))
-          : [el];
-        const index = siblings.indexOf(el);
-        const totalDelay = delay + index * 0.08;
-
-        animate(
-          el,
-          { opacity: [0, 1], y: [el.dataset.reveal === 'left' ? 0 : 24, 0], x: [el.dataset.reveal === 'left' ? -24 : el.dataset.reveal === 'right' ? 24 : 0, 0] },
-          { duration: 0.65, delay: totalDelay, easing: [0.22, 1, 0.36, 1] }
-        );
-        el.classList.add('reveal-in');
-        observer.unobserve(el);
+        revealElement(entry.target as HTMLElement, observer);
       });
     },
-    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    { threshold: 0.08, rootMargin: '0px 0px -20px 0px' }
   );
 
-  elements.forEach((el) => observer.observe(el));
+  elements.forEach((el) => {
+    if (isInViewport(el)) {
+      revealElement(el, observer);
+    } else {
+      observer.observe(el);
+    }
+  });
 }
 
 function initCounters() {
@@ -239,6 +260,7 @@ function clearInlineStyles(el: HTMLElement | null | undefined) {
   if (!el) return;
   el.style.transform = '';
   el.style.opacity = '';
+  el.style.translate = '';
 }
 
 function initHeroStage() {

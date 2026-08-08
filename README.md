@@ -2,6 +2,8 @@
 
 Static marketing site for [caira.care](https://caira.care), built with Astro 5 and Tailwind CSS. Deployed to Firebase Hosting on the `caira-prod` project.
 
+**Brand copy:** Official slogan *Care — simplified, connected, intelligent.* — see [brand_guidelines.md](../caira-backend/platform_docs/brand_guidelines.md) and [CAIRA_CUSTOMER_PITCH_SOURCE.md](../caira-backend/platform_docs/CAIRA_CUSTOMER_PITCH_SOURCE.md).
+
 ## Development
 
 Requires **Node.js 24 LTS** (see `.nvmrc`).

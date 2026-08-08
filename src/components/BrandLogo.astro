@@ -1,0 +1,28 @@
+---
+/** Transparent emblem + wordmark PNGs from clients (lockup-light PNG has no alpha — do not use). */
+interface Props {
+  variant?: 'light' | 'dark';
+  class?: string;
+}
+
+const { variant = 'light', class: className = '' } = Astro.props;
+const onDark = variant === 'dark';
+const wordmarkSrc = onDark ? '/logo-wordmark-white.png' : '/logo-wordmark-navy.png';
+---
+
+<span class:list={['brand-logo inline-flex min-w-0 items-center gap-2.5', className]}>
+  <img
+    src="/logo-icon.png"
+    alt=""
+    class="h-9 w-9 shrink-0 object-contain sm:h-10 sm:w-10"
+    width="40"
+    height="40"
+  />
+  <img
+    src={wordmarkSrc}
+    alt="Caira"
+    class="h-7 w-auto shrink-0 object-contain sm:h-8"
+    width="120"
+    height="37"
+  />
+</span>

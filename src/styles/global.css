@@ -25,7 +25,7 @@
   h1,
   h2,
   h3 {
-    @apply font-display tracking-tight;
+    @apply font-heading tracking-tight;
   }
 
   [id] {
@@ -124,8 +124,30 @@
     font-family: 'Lora', Georgia, serif;
   }
 
+  .ai-agent-card {
+    @apply rounded-2xl border border-caira-teal/15 bg-caira-mint/15 p-6 transition duration-300 hover:border-caira-cyan/35 hover:shadow-md hover:shadow-caira-cyan/10;
+    border-left: 4px solid rgb(76 203 200);
+  }
+
+  .ai-assistants-panel {
+    @apply shadow-sm;
+  }
+
   .text-gradient {
     @apply bg-gradient-to-r from-caira-coral via-caira-amber to-caira-teal bg-clip-text text-transparent;
+  }
+
+  .text-gradient-sunrise {
+    @apply bg-gradient-to-r from-caira-coral via-caira-amber to-caira-teal bg-clip-text text-transparent;
+  }
+
+  .caira-brand-gradient {
+    background-color: #0f172a;
+    background-image:
+      radial-gradient(ellipse 90% 70% at 85% 95%, rgba(16, 185, 129, 0.45), transparent 55%),
+      radial-gradient(ellipse 60% 50% at 10% 15%, rgba(69, 179, 164, 0.22), transparent 50%),
+      radial-gradient(ellipse 40% 35% at 60% 30%, rgba(238, 108, 77, 0.12), transparent 45%),
+      linear-gradient(155deg, #0f172a 0%, #1e293b 42%, #134e4a 78%, #0d9488 100%);
   }
 
   .aurora-warm {
@@ -143,11 +165,7 @@
   }
 
   .spotlight-dark {
-    @apply bg-caira-navy text-white;
-    background:
-      radial-gradient(ellipse 60% 50% at 0% 0%, rgba(76, 203, 200, 0.12), transparent 55%),
-      radial-gradient(ellipse 50% 40% at 100% 100%, rgba(92, 161, 156, 0.15), transparent 50%),
-      rgb(60 76 108);
+    @apply caira-brand-gradient text-white;
   }
 
   .hero-mesh {
@@ -260,6 +278,26 @@
     @apply overflow-hidden rounded-[2rem] bg-white;
   }
 
+  .feature-showcase-col {
+    @apply flex h-full flex-col items-center;
+  }
+
+  .feature-showcase-col .feature-card {
+    @apply flex w-full flex-1 flex-col;
+  }
+
+  .feature-showcase-device {
+    @apply mt-8 w-full max-w-[220px] shrink-0 sm:max-w-[240px];
+  }
+
+  .feature-showcase-device .device-screen {
+    aspect-ratio: 9 / 19.5;
+  }
+
+  .feature-showcase-device .device-screen img {
+    @apply h-full w-full object-cover object-top;
+  }
+
   .browser-frame {
     @apply overflow-hidden rounded-2xl border border-caira-navy/10 bg-white shadow-2xl shadow-caira-navy/15;
   }
@@ -351,10 +389,10 @@
   }
 
   .reveal {
-    @apply opacity-0;
+    @apply opacity-100;
   }
 
-  .reveal-in {
+  .reveal.reveal-in {
     @apply opacity-100;
   }
 

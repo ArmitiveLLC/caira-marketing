@@ -1,7 +1,7 @@
 ---
 title: Support
 description: Get help with Caira — contact, FAQs, and resources for centers in pilot or production.
-lastUpdated: '2026-06-09'
+lastUpdated: '2026-08-08'
 ---
 
 We're here to help directors, teachers, and parents get the most out of Caira.
@@ -15,7 +15,8 @@ We typically respond within one business day. For urgent center-wide outages, in
 ## Sign in
 
 - **Web portal:** [app.caira.care](https://app.caira.care)
-- **Mobile app:** Download Caira from the App Store or Google Play (search "Caira" or use the links on your center's welcome email)
+- **Mobile app (iOS):** Caira on **TestFlight** for pilot and production centers — your director or Caira onboarding will provide access. Search the App Store for TestFlight if needed.
+- **Mobile app (Android):** Contact your center or [support@caira.care](mailto:support@caira.care) for availability.
 
 If you forgot your password, use **Forgot password** on the sign-in screen or ask your center director to resend an invite.
 

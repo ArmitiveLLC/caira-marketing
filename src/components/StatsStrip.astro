@@ -1,17 +1,16 @@
 ---
-import SectionHeading from './SectionHeading.astro';
 import Reveal from './Reveal.astro';
 
 const stats = [
-  { value: 90, suffix: '%', label: 'Less time on end-of-day logs' },
-  { value: 3, suffix: 'x', label: 'More meaningful parent updates' },
-  { value: 100, suffix: '%', label: 'Staff-reviewed before families see it' },
-  { value: 2, suffix: '', label: 'Languages — English & Spanish' },
+  { value: 12, suffix: '', label: 'Live DECAL compliance checks on your dashboard' },
+  { value: 4, suffix: '', label: 'Tailored surfaces — web portal + director, teacher & parent apps' },
+  { value: 100, suffix: '%', label: 'Staff-reviewed before families see AI output' },
+  { value: 2, suffix: '', label: 'Interface languages — English & Spanish UI' },
 ];
 ---
 
 <section class="border-y border-caira-navy/10 bg-white">
-  <div class="section-pad py-12">
+  <div class="section-pad py-12 md:py-14">
     <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4" data-reveal-stagger>
       {
         stats.map((stat, i) => (

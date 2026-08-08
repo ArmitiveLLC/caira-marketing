@@ -1,7 +1,7 @@
 ---
 title: Privacy Policy
 description: How Caira collects, uses, and protects information for childcare centers, staff, and families.
-lastUpdated: '2026-06-09'
+lastUpdated: '2026-08-08'
 ---
 
 Caira ("we," "us," or "our") provides software for licensed childcare centers, including mobile and web applications at [app.caira.care](https://app.caira.care) and related services. This Privacy Policy describes how we handle personal information when you use Caira.
@@ -40,7 +40,8 @@ Centers are responsible for obtaining appropriate consent from parents or guardi
 ### Usage and device information
 
 - App and web usage data (features used, timestamps, crash reports)
-- Device type, operating system, and general location derived from IP address (not precise GPS unless you grant location permission for a specific feature)
+- Device type, operating system, and general location derived from IP address
+- **Precise location** when you use parent mobile **geofenced check-in** — only while you use that feature and if you grant location permission in the app
 - Push notification tokens
 
 ### Content you provide
