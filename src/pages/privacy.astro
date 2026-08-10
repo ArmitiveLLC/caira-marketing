@@ -1,16 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { getEntry, render } from 'astro:content';
-
-const entry = await getEntry('legal', 'privacy');
-if (!entry) throw new Error('Privacy content not found');
-const { Content } = await render(entry);
+import LegalPage from '../components/LegalPage.astro';
 ---
 
-<BaseLayout title={entry.data.title} description={entry.data.description}>
-  <article class="section-pad prose prose-caira max-w-3xl">
-    <p class="text-sm text-caira-navy/60">Last updated {entry.data.lastUpdated}</p>
-    <h1>{entry.data.title}</h1>
-    <Content />
-  </article>
-</BaseLayout>
+<LegalPage entryId="privacy" locale="en" />

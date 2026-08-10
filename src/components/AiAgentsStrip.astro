@@ -1,60 +1,24 @@
 ---
 import SectionHeading from './SectionHeading.astro';
 import Reveal from './Reveal.astro';
+import type { Messages } from '../i18n';
 
-const agents = [
-  {
-    name: 'Activity Logging',
-    audience: 'Teachers',
-    body: 'Voice, photo, or text → structured drafts with GELDS enrichment. Teachers approve before anything reaches families.',
-  },
-  {
-    name: 'Insights',
-    audience: 'Teachers · Parents · Directors',
-    body: 'Daily narratives, weekly digests, classroom patterns, and attention flags — every output cites source log IDs.',
-  },
-  {
-    name: 'Curriculum',
-    audience: 'Standards linking',
-    body: 'Vector search (RAG) over GELDS, GOLD, and Creative Curriculum — observations and plans linked automatically.',
-  },
-  {
-    name: 'Lesson Planner',
-    audience: 'Teachers · Directors',
-    body: 'AI-assisted weekly classroom plans — standards suggestions, materials lists, and draft → approve → publish workflow.',
-  },
-  {
-    name: 'Learning Manager',
-    audience: 'Directors',
-    body: 'Center-wide weekly themes, objective pools, plan analysis, and materials aggregation across every classroom.',
-  },
-  {
-    name: 'Meal Chef',
-    audience: 'Directors · Kitchen',
-    body: 'CACFP-aware Mon–Fri menus with allergen flags from enrolled students, chef chat, and consolidated shopping lists.',
-  },
-];
+interface Props {
+  aiAgents: Messages['aiAgents'];
+}
 
-const assistants = [
-  'Teacher Assistant — classroom-scoped chat + voice',
-  'Director Assistant — planning & operational guidance',
-  'Ask Caira — parent Q&A grounded in approved logs',
-];
+const { aiAgents } = Astro.props;
 ---
 
 <section id="ai" class="scroll-mt-24 border-y border-caira-navy/10 bg-white">
   <div class="section-pad">
     <Reveal>
-      <SectionHeading
-        eyebrow="AI at the center"
-        title="Six specialized agents — not a bolt-on chatbot"
-        subtitle="Versioned prompts, auditable invocations, and PII scrubbing before every request. Grounded in your center's real observations."
-      />
+      <SectionHeading eyebrow={aiAgents.eyebrow} title={aiAgents.title} subtitle={aiAgents.subtitle} />
     </Reveal>
 
     <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-reveal-stagger>
       {
-        agents.map((agent, i) => (
+        aiAgents.agents.map((agent, i) => (
           <Reveal delay={i * 0.06}>
             <article class="ai-agent-card h-full">
               <p class="text-[10px] font-bold uppercase tracking-widest text-caira-teal">{agent.audience}</p>
@@ -68,10 +32,10 @@ const assistants = [
 
     <Reveal delay={0.2}>
       <div class="ai-assistants-panel mt-10 rounded-2xl border border-caira-navy/10 bg-caira-paper p-6 md:p-8">
-        <p class="text-xs font-bold uppercase tracking-[0.2em] text-caira-teal">Live conversational assistants</p>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-caira-teal">{aiAgents.assistantsHeading}</p>
         <ul class="mt-4 grid gap-3 sm:grid-cols-3">
           {
-            assistants.map((item) => (
+            aiAgents.assistants.map((item) => (
               <li class="flex items-start gap-2 text-sm text-caira-navy/80">
                 <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-caira-cyan" aria-hidden="true"></span>
                 {item}
@@ -79,9 +43,7 @@ const assistants = [
             ))
           }
         </ul>
-        <p class="mt-5 text-sm leading-relaxed text-caira-navy/60">
-          Every AI call is logged — tokens, latency, prompt version — with staff review before families see generated content.
-        </p>
+        <p class="mt-5 text-sm leading-relaxed text-caira-navy/60">{aiAgents.footnote}</p>
       </div>
     </Reveal>
   </div>

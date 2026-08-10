@@ -1,12 +1,17 @@
 ---
 import Reveal from './Reveal.astro';
 
-const stats = [
-  { value: 12, suffix: '', label: 'Live DECAL compliance checks on your dashboard' },
-  { value: 4, suffix: '', label: 'Tailored surfaces — web portal + director, teacher & parent apps' },
-  { value: 100, suffix: '%', label: 'Staff-reviewed before families see AI output' },
-  { value: 2, suffix: '', label: 'Interface languages — English & Spanish UI' },
-];
+interface StatItem {
+  value: number;
+  suffix: string;
+  label: string;
+}
+
+interface Props {
+  stats: StatItem[];
+}
+
+const { stats } = Astro.props;
 ---
 
 <section class="border-y border-caira-navy/10 bg-white">
@@ -16,11 +21,7 @@ const stats = [
         stats.map((stat, i) => (
           <Reveal delay={i * 0.05}>
             <div class="text-center">
-              <p
-                class="stat-counter-value"
-                data-counter={stat.value}
-                data-counter-suffix={stat.suffix}
-              >
+              <p class="stat-counter-value" data-counter={stat.value} data-counter-suffix={stat.suffix}>
                 0{stat.suffix}
               </p>
               <p class="mt-2 text-sm text-caira-navy/65">{stat.label}</p>

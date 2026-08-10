@@ -2,6 +2,14 @@
 import Reveal from './Reveal.astro';
 import PilotForm from './PilotForm.astro';
 import { pilotContactEmail } from '../lib/pilot-api';
+import type { Messages } from '../i18n';
+
+interface Props {
+  pilot: Messages['pilot'];
+  pilotForm: Messages['pilotForm'];
+}
+
+const { pilot, pilotForm } = Astro.props;
 ---
 
 <section id="pilot" class="scroll-mt-24 aurora-cta relative overflow-hidden border-t border-caira-navy/10">
@@ -9,27 +17,24 @@ import { pilotContactEmail } from '../lib/pilot-api';
   <div class="section-pad relative">
     <Reveal>
       <div class="mx-auto max-w-3xl text-center">
-        <p class="section-eyebrow mb-4">Georgia & beyond</p>
+        <p class="section-eyebrow mb-4">{pilot.eyebrow}</p>
         <h2 class="text-3xl font-bold text-caira-navy md:text-4xl lg:text-5xl">
-          Join the <span class="text-gradient">Caira pilot</span>
+          {pilot.titleBefore}<span class="text-gradient">{pilot.titleHighlight}</span>
         </h2>
-        <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-caira-navy/75">
-          Partner with us for dedicated onboarding, priority support, and a voice in the product
-          roadmap — while your team keeps human care at the center.
-        </p>
+        <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-caira-navy/75">{pilot.subtitle}</p>
       </div>
     </Reveal>
     <Reveal delay={0.1}>
       <div class="mt-10">
-        <PilotForm />
+        <PilotForm copy={pilotForm} />
       </div>
     </Reveal>
     <p class="mt-6 text-center text-sm text-caira-navy/55">
-      Prefer email? Reach us at{' '}
+      {pilot.emailNote}{' '}
       <a href={`mailto:${pilotContactEmail}?subject=Caira%20pilot%20inquiry`} class="text-caira-teal hover:underline">
         {pilotContactEmail}
-      </a>
-      — we respond within one business day.
+      </a>{' '}
+      {pilot.emailResponseTime}
     </p>
   </div>
 </section>

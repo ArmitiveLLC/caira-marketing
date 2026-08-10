@@ -1,65 +1,27 @@
 ---
+import SectionHeading from './SectionHeading.astro';
 import Reveal from './Reveal.astro';
+import type { Messages } from '../i18n';
+import type { Locale } from '../i18n/config';
+import { localePath } from '../i18n/config';
 
-const infraItems = [
-  {
-    title: 'Google Cloud Platform',
-    body: 'Cloud-hosted SaaS on GCP — Cloud Run, managed PostgreSQL, and Firebase — built for production scale, not a side project stack.',
-    icon: 'M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z',
-  },
-  {
-    title: 'Tenant isolation',
-    body: 'Every center is logically separated with role-based access and database row-level security — directors, teachers, and parents only see what their role allows.',
-    icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z',
-  },
-  {
-    title: 'Encryption & audit',
-    body: 'Data encrypted in transit, authentication via Firebase, and AI activity logged with redacted inputs for accountability.',
-    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
-  },
-  {
-    title: 'U.S. data residency',
-    body: 'Center data is processed and stored in the United States. We do not sell personal information or use child data for advertising.',
-    icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
-  },
-];
+interface Props {
+  security: Messages['security'];
+  infraItems: Array<Messages['security']['infraItems'][number] & { icon: string }>;
+  locale: Locale;
+}
 
-const aiPrivacySteps = [
-  {
-    label: 'Before AI',
-    text: 'Child names are replaced with opaque tokens. Emails, phone numbers, and other identifiers are stripped.',
-  },
-  {
-    label: 'During AI',
-    text: 'Only scrubbed classroom observations reach Google Vertex AI — within our GCP environment, not public model training.',
-  },
-  {
-    label: 'After AI',
-    text: 'Responses pass safety checks. Names are restored inside Caira only. Staff review every output before families see it.',
-  },
-];
-
-const compliancePills = [
-  'COPPA-aware design',
-  'CACFP workflows',
-  'DECAL-ready records',
-  'No data selling',
-  'Human review gate',
-];
+const { security, infraItems, locale } = Astro.props;
+const privacyHref = localePath(locale, '/privacy');
 ---
 
 <section id="security" class="spotlight-dark scroll-mt-24 border-y border-caira-navy/10">
   <div class="section-pad">
     <Reveal>
       <div class="mx-auto max-w-2xl text-center">
-        <p class="section-eyebrow-light mb-3">Enterprise SaaS</p>
-        <h2 class="text-3xl font-bold tracking-tight md:text-4xl">
-          Production infrastructure. Privacy by design.
-        </h2>
-        <p class="mt-4 text-lg leading-relaxed text-white/75">
-          Caira is a cloud-hosted platform for licensed childcare — not a spreadsheet with an AI chatbot
-          bolted on. Security, tenant isolation, and compliance workflows are part of the product.
-        </p>
+        <p class="section-eyebrow-light mb-3">{security.eyebrow}</p>
+        <h2 class="text-3xl font-bold tracking-tight md:text-4xl">{security.title}</h2>
+        <p class="mt-4 text-lg leading-relaxed text-white/75">{security.subtitle}</p>
       </div>
     </Reveal>
 
@@ -87,17 +49,11 @@ const compliancePills = [
 
         <div class="relative grid gap-10 lg:grid-cols-[1fr,1.1fr] lg:items-center">
           <div>
-            <p class="text-xs font-bold uppercase tracking-[0.2em] text-caira-cyan">AI privacy gate</p>
-            <h3 class="mt-3 text-2xl font-bold md:text-3xl">
-              Personal information does not reach AI models in the clear
-            </h3>
-            <p class="mt-4 text-sm leading-relaxed text-white/70 md:text-base">
-              Every AI request passes through a PII scrubbing gate before it leaves Caira. Identifiers
-              are tokenized or removed; only classroom observations needed for drafting logs and narratives
-              are sent — and always under staff review before parents receive anything.
-            </p>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-caira-cyan">{security.aiPrivacy.eyebrow}</p>
+            <h3 class="mt-3 text-2xl font-bold md:text-3xl">{security.aiPrivacy.title}</h3>
+            <p class="mt-4 text-sm leading-relaxed text-white/70 md:text-base">{security.aiPrivacy.subtitle}</p>
             <div class="mt-6 flex flex-wrap gap-2">
-              {compliancePills.map((pill) => (
+              {security.aiPrivacy.pills.map((pill) => (
                 <span class="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-medium text-white/80">
                   {pill}
                 </span>
@@ -107,7 +63,7 @@ const compliancePills = [
 
           <ol class="relative space-y-4">
             {
-              aiPrivacySteps.map((step, i) => (
+              security.aiPrivacy.steps.map((step, i) => (
                 <li class="security-ai-step flex gap-4 rounded-2xl border border-white/10 bg-caira-navy/60 p-5">
                   <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-caira-teal text-sm font-bold text-white">
                     {i + 1}
@@ -123,9 +79,9 @@ const compliancePills = [
         </div>
 
         <p class="relative mt-8 text-center text-sm text-white/50">
-          Read our full practices in the{' '}
-          <a href="/privacy" class="font-medium text-caira-cyan underline-offset-2 hover:underline">
-            Privacy Policy
+          {security.privacyLinkText}{' '}
+          <a href={privacyHref} class="font-medium text-caira-cyan underline-offset-2 hover:underline">
+            {security.privacyLinkLabel}
           </a>
           .
         </p>

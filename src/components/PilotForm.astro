@@ -1,6 +1,12 @@
 ---
-import { classroomBands, getPilotApiUrl, pilotContactEmail } from '../lib/pilot-api';
+import { getPilotApiUrl, pilotContactEmail } from '../lib/pilot-api';
+import type { Messages } from '../i18n';
 
+interface Props {
+  copy: Messages['pilotForm'];
+}
+
+const { copy } = Astro.props;
 const apiUrl = getPilotApiUrl();
 ---
 
@@ -9,6 +15,8 @@ const apiUrl = getPilotApiUrl();
   data-pilot-form
   data-pilot-status="idle"
   data-api-url={apiUrl}
+  data-error-failed={copy.errors.requestFailed}
+  data-error-generic={copy.errors.somethingWentWrong}
 >
   <div class="pilot-form-success glass-card p-8 text-center" data-pilot-success>
     <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-caira-teal/15 text-caira-teal">
@@ -16,74 +24,74 @@ const apiUrl = getPilotApiUrl();
         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
       </svg>
     </div>
-    <h3 class="text-xl font-bold text-caira-navy">Request received!</h3>
+    <h3 class="text-xl font-bold text-caira-navy">{copy.successTitle}</h3>
     <p class="mt-3 text-sm leading-relaxed text-caira-navy/70">
-      Our team will reach out within one business day. You can also email us at{' '}
+      {copy.successBody}{' '}
       <a href={`mailto:${pilotContactEmail}`} class="font-medium text-caira-teal hover:underline">
         {pilotContactEmail}
       </a>
     </p>
-    <button type="button" class="btn-secondary mt-6" data-pilot-reset>Submit another inquiry</button>
+    <button type="button" class="btn-secondary mt-6" data-pilot-reset>{copy.reset}</button>
   </div>
 
   <form class="pilot-form glass-card p-6 sm:p-8" data-pilot-fields novalidate>
     <div class="space-y-5">
       <div>
-        <label class="pilot-label" for="pilot-name">Full name *</label>
+        <label class="pilot-label" for="pilot-name">{copy.nameLabel}</label>
         <input id="pilot-name" class="pilot-input" type="text" name="name" required autocomplete="name" />
       </div>
       <div>
-        <label class="pilot-label" for="pilot-email">Work email *</label>
+        <label class="pilot-label" for="pilot-email">{copy.emailLabel}</label>
         <input id="pilot-email" class="pilot-input" type="email" name="email" required autocomplete="email" />
       </div>
       <div>
-        <label class="pilot-label" for="pilot-center">Center name *</label>
+        <label class="pilot-label" for="pilot-center">{copy.centerLabel}</label>
         <input id="pilot-center" class="pilot-input" type="text" name="centerName" required autocomplete="organization" />
       </div>
       <div>
-        <label class="pilot-label" for="pilot-location">Location</label>
+        <label class="pilot-label" for="pilot-location">{copy.locationLabel}</label>
         <input
           id="pilot-location"
           class="pilot-input"
           type="text"
           name="location"
-          placeholder="City, state"
+          placeholder={copy.locationPlaceholder}
           autocomplete="address-level2"
         />
       </div>
       <div>
-        <label class="pilot-label" for="pilot-classrooms">Number of classrooms</label>
+        <label class="pilot-label" for="pilot-classrooms">{copy.classroomsLabel}</label>
         <select id="pilot-classrooms" class="pilot-input" name="classrooms">
-          {classroomBands.map((band) => <option value={band}>{band}</option>)}
+          {copy.classroomBands.map((band) => <option value={band}>{band}</option>)}
         </select>
       </div>
       <div>
-        <label class="pilot-label" for="pilot-message">Tell us about your center</label>
+        <label class="pilot-label" for="pilot-message">{copy.messageLabel}</label>
         <textarea
           id="pilot-message"
           class="pilot-input min-h-[110px] resize-none"
           name="message"
           rows={4}
-          placeholder="Frameworks you use, goals for the pilot, timeline…"
+          placeholder={copy.messagePlaceholder}
         ></textarea>
       </div>
       <p class="pilot-error text-sm text-red-600" data-pilot-error hidden></p>
       <button type="submit" class="btn-primary w-full justify-center" data-pilot-submit>
-        <span data-pilot-submit-label>Ask about a pilot</span>
+        <span data-pilot-submit-label>{copy.submit}</span>
         <span class="pilot-submit-loading hidden items-center gap-2" data-pilot-loading aria-hidden="true">
           <svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
           </svg>
-          Submitting…
+          {copy.submitting}
         </span>
       </button>
       <p class="text-center text-xs text-caira-navy/50">
-        Or email{' '}
+        {copy.emailOrDirect}{' '}
         <a href={`mailto:${pilotContactEmail}?subject=Caira%20pilot%20inquiry`} class="text-caira-teal hover:underline">
           {pilotContactEmail}
         </a>{' '}
-        directly.
+        {copy.emailOrDirectSuffix}
       </p>
     </div>
   </form>

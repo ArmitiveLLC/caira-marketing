@@ -18,15 +18,17 @@ function getFormData(form: HTMLFormElement) {
 }
 
 export function initPilotForm() {
-  const root = document.querySelector<HTMLElement>('[data-pilot-form]');
-  if (!root) return;
+    const root = document.querySelector<HTMLElement>('[data-pilot-form]');
+    if (!root) return;
 
-  const form = root.querySelector<HTMLFormElement>('form');
-  const errorEl = root.querySelector<HTMLElement>('[data-pilot-error]');
-  const submitBtn = root.querySelector<HTMLButtonElement>('[data-pilot-submit]');
-  if (!form || !submitBtn) return;
+    const form = root.querySelector<HTMLFormElement>('form');
+    const errorEl = root.querySelector<HTMLElement>('[data-pilot-error]');
+    const submitBtn = root.querySelector<HTMLButtonElement>('[data-pilot-submit]');
+    if (!form || !submitBtn) return;
 
-  const apiUrl = root.dataset.apiUrl || getPilotApiUrl();
+    const apiUrl = root.dataset.apiUrl || getPilotApiUrl();
+    const fallbackError = root.dataset.errorGeneric || 'Something went wrong.';
+    const requestFailed = root.dataset.errorFailed || 'Request failed';
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -47,7 +49,7 @@ export function initPilotForm() {
 
       if (!response.ok) {
         const data = (await response.json().catch(() => null)) as { error?: string } | null;
-        throw new Error(data?.error || 'Request failed');
+        throw new Error(data?.error || requestFailed);
       }
 
       form.reset();
@@ -55,7 +57,7 @@ export function initPilotForm() {
     } catch (error) {
       setStatus(root, 'error');
       if (errorEl) {
-        const message = error instanceof Error ? error.message : 'Something went wrong.';
+        const message = error instanceof Error ? error.message : fallbackError;
         errorEl.textContent = message;
         errorEl.hidden = false;
       }

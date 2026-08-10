@@ -1,15 +1,13 @@
 ---
 import DeviceFrame from './DeviceFrame.astro';
+import type { Messages } from '../i18n';
 
 interface Props {
+  narrative: Messages['narrative'];
   storyImage?: string;
-  storyAlt?: string;
 }
 
-const {
-  storyImage = '/screenshots/app-parent-daily-story.png',
-  storyAlt = "Caira parent's daily story narrative",
-} = Astro.props;
+const { narrative, storyImage = '/screenshots/app-parent-daily-story.png' } = Astro.props;
 ---
 
 <aside class="spotlight-dark narrative-quote relative overflow-hidden rounded-3xl px-8 py-10 md:px-12 md:py-14">
@@ -18,18 +16,15 @@ const {
 
   <div class="relative grid gap-10 lg:grid-cols-[1fr,auto] lg:items-center lg:gap-14">
     <div>
-      <p class="text-xs font-bold uppercase tracking-[0.2em] text-caira-cyan">What parents receive</p>
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-caira-cyan">{narrative.eyebrow}</p>
       <blockquote class="ai-sample mt-4 text-xl leading-relaxed text-white/95 md:text-2xl">
-        "Mia had a fantastic day full of fun and discovery! It was so exciting to see her vocabulary
-        grow during story time — putting three words together to express what she needs."
+        "{narrative.quote}"
       </blockquote>
-      <p class="mt-5 text-sm text-white/55">
-        AI-generated daily narrative · reviewed by staff · tied to approved observations · Ask Caira for follow-up questions
-      </p>
+      <p class="mt-5 text-sm text-white/55">{narrative.caption}</p>
     </div>
 
     <div class="flex justify-center lg:justify-end">
-      <DeviceFrame src={storyImage} alt={storyAlt} class="w-full max-w-[240px] shadow-glow-teal" />
+      <DeviceFrame src={storyImage} alt={narrative.storyAlt} class="w-full max-w-[240px] shadow-glow-teal" />
     </div>
   </div>
 </aside>

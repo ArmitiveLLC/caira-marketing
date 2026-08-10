@@ -1,0 +1,28 @@
+---
+import type { Locale } from '../i18n/config';
+import { alternateLocale, switchLocalePath } from '../i18n/config';
+import { getMessages } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  compact?: boolean;
+}
+
+const { locale, compact = false } = Astro.props;
+const m = getMessages(locale);
+const other = alternateLocale(locale);
+const href = switchLocalePath(locale, Astro.url.pathname);
+---
+
+<a
+  href={href}
+  class:list={[
+    'lang-switch whitespace-nowrap rounded-full border border-caira-navy/10 bg-white/70 px-3 py-1.5 text-xs font-semibold text-caira-navy/75 transition hover:border-caira-teal/30 hover:text-caira-teal',
+    compact ? 'inline-flex' : 'hidden sm:inline-flex',
+  ]}
+  hreflang={other}
+  lang={other}
+  aria-label={m.lang.switchAria}
+>
+  {m.lang.switchLabel}
+</a>

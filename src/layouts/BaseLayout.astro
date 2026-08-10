@@ -3,22 +3,31 @@ import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import type { Locale } from '../i18n/config';
+import { getMessages } from '../i18n';
+import { alternateLocale, localePath } from '../i18n/config';
 
 interface Props {
   title: string;
   description?: string;
+  locale?: Locale;
 }
+
+const locale = Astro.props.locale ?? 'en';
+const m = getMessages(locale);
 
 const {
   title,
-  description = 'Care — simplified, connected, intelligent. Developmental intelligence for Georgia childcare: AI logging, DECAL compliance, parent narratives, Ask Caira, and one communications platform.',
+  description = m.meta.description,
 } = Astro.props;
 
-const pageTitle = title === 'Caira' ? title : `${title} · Caira`;
+const pageTitle = title === m.meta.title ? title : `${title} · ${m.meta.title}`;
+const otherLocale = alternateLocale(locale);
+const canonicalPath = Astro.url.pathname;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,7 +35,10 @@ const pageTitle = title === 'Caira' ? title : `${title} · Caira`;
     <meta property="og:image" content="/splash.png" />
     <link rel="icon" type="image/png" href="/logo-icon.png" />
     <link rel="apple-touch-icon" href="/icon.png" />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="canonical" href={new URL(canonicalPath, Astro.site)} />
+    <link rel="alternate" hreflang={locale} href={new URL(canonicalPath, Astro.site)} />
+    <link rel="alternate" hreflang={otherLocale} href={new URL(localePath(otherLocale, canonicalPath), Astro.site)} />
+    <link rel="alternate" hreflang="x-default" href={new URL(localePath('en', canonicalPath), Astro.site)} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <title>{pageTitle}</title>
@@ -36,11 +48,11 @@ const pageTitle = title === 'Caira' ? title : `${title} · Caira`;
     <ClientRouter />
   </head>
   <body class="flex min-h-screen flex-col">
-    <Header />
+    <Header locale={locale} />
     <main class="flex-1">
       <slot />
     </main>
-    <Footer />
+    <Footer locale={locale} />
     <script src="../scripts/motion.ts"></script>
   </body>
 </html>
