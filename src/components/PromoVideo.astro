@@ -1,0 +1,101 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import Reveal from './Reveal.astro';
+import type { Messages } from '../i18n';
+import { buildPromoVideos } from '../i18n/home-data';
+
+interface Props {
+  promoVideo: Messages['promoVideo'];
+}
+
+const { promoVideo } = Astro.props;
+const videos = buildPromoVideos(promoVideo);
+const first = videos[0];
+---
+
+<section id="video" class="scroll-mt-24 border-b border-caira-navy/10 bg-white">
+  <div class="section-pad py-14 md:py-16">
+    <Reveal>
+      <SectionHeading
+        eyebrow={promoVideo.eyebrow}
+        title={promoVideo.title}
+        subtitle={promoVideo.subtitle}
+      />
+    </Reveal>
+
+    <Reveal delay={0.08}>
+      <div class="promo-video-carousel mx-auto mt-10 max-w-4xl" data-promo-video-carousel>
+        <div class="promo-video-shell">
+          <div class="promo-video-viewport">
+            {
+              videos.map((video, i) => (
+                <article
+                  class:list={['promo-video-slide', i === 0 && 'is-active']}
+                  data-promo-video-slide={i}
+                  data-promo-video-title={video.title}
+                  data-promo-video-desc={video.description}
+                  hidden={i !== 0}
+                  aria-hidden={i !== 0}
+                >
+                  <video
+                    class="promo-video-player"
+                    controls
+                    playsinline
+                    preload="metadata"
+                    poster={video.poster}
+                    aria-label={video.ariaLabel}
+                    data-promo-video-player
+                  >
+                    <source src={video.src} type="video/mp4" />
+                  </video>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="promo-video-caption" aria-live="polite">
+          <p class="promo-video-caption-title" data-promo-video-title>{first.title}</p>
+          <p class="promo-video-caption-desc" data-promo-video-desc>{first.description}</p>
+        </div>
+
+        {
+          videos.length > 1 && (
+            <div class="promo-video-controls">
+              <button type="button" class="promo-video-nav" data-promo-video-prev aria-label={promoVideo.prevLabel}>
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+                </svg>
+              </button>
+
+              <div class="promo-video-dots" role="tablist" aria-label={promoVideo.eyebrow}>
+                {
+                  videos.map((video, i) => (
+                    <button
+                      type="button"
+                      class:list={['promo-video-dot', i === 0 && 'is-active']}
+                      data-promo-video-dot={i}
+                      role="tab"
+                      aria-selected={i === 0}
+                      aria-label={video.title}
+                    ></button>
+                  ))
+                }
+              </div>
+
+              <button type="button" class="promo-video-nav" data-promo-video-next aria-label={promoVideo.nextLabel}>
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+            </div>
+          )
+        }
+      </div>
+    </Reveal>
+  </div>
+</section>
+
+<script>
+  import '../scripts/promo-video-carousel.ts';
+</script>

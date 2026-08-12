@@ -42,6 +42,28 @@ export const en = {
     trustPills: ['GELDS & GOLD', 'CACFP meals', 'English & Spanish UI', 'DECAL-aware', 'Ask Caira'],
   },
 
+  promoVideo: {
+    eyebrow: 'See Caira in action',
+    title: 'Watch how Caira works',
+    subtitle: 'Product overview and voice logging — see the platform in real center workflows.',
+    prevLabel: 'Previous video',
+    nextLabel: 'Next video',
+    items: [
+      {
+        title: 'Care — simplified',
+        description:
+          'A quick look at how Caira connects directors, teachers, and families on one platform.',
+        ariaLabel: 'Caira product overview video: Care — simplified',
+      },
+      {
+        title: 'Voice logging',
+        description:
+          'Teachers speak naturally in the classroom — Caira drafts structured documentation for review.',
+        ariaLabel: 'How Caira voice logging works',
+      },
+    ],
+  },
+
   heroSlides: [
     {
       alt: 'Teacher logging menu with voice, photo, or manual options',

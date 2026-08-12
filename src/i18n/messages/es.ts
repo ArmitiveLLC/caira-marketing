@@ -44,6 +44,29 @@ export const es: Messages = {
     trustPills: ['GELDS y GOLD', 'Comidas CACFP', 'Interfaz en inglés y español', 'Compatible con DECAL', 'Ask Caira'],
   },
 
+  promoVideo: {
+    eyebrow: 'Vea Caira en acción',
+    title: 'Vea cómo funciona Caira',
+    subtitle:
+      'Presentación del producto y registro por voz — vea la plataforma en flujos reales del centro.',
+    prevLabel: 'Video anterior',
+    nextLabel: 'Siguiente video',
+    items: [
+      {
+        title: 'Cuidado — simplificado',
+        description:
+          'Un vistazo rápido a cómo Caira conecta directores, maestros y familias en una sola plataforma.',
+        ariaLabel: 'Video de presentación de Caira: Cuidado — simplificado',
+      },
+      {
+        title: 'Registro por voz',
+        description:
+          'Los maestros hablan con naturalidad en el aula — Caira redacta documentación estructurada para revisión.',
+        ariaLabel: 'Cómo funciona el registro por voz de Caira',
+      },
+    ],
+  },
+
   heroSlides: [
     {
       alt: 'Menú de registro del maestro con opciones de voz, foto o manual',

@@ -183,6 +183,62 @@
     @apply items-center;
   }
 
+  .promo-video-shell {
+    @apply overflow-hidden rounded-3xl border border-caira-navy/10 bg-caira-navy shadow-glass;
+  }
+
+  .promo-video-viewport {
+    @apply relative aspect-video w-full bg-caira-navy;
+  }
+
+  .promo-video-slide {
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+  }
+
+  .promo-video-slide.is-active {
+    @apply z-10 opacity-100;
+  }
+
+  .promo-video-slide:not(.is-active) {
+    @apply pointer-events-none;
+  }
+
+  .promo-video-player {
+    @apply block h-full w-full bg-caira-navy object-contain;
+  }
+
+  .promo-video-caption {
+    @apply mt-5 text-center;
+  }
+
+  .promo-video-caption-title {
+    @apply text-lg font-bold text-caira-navy;
+  }
+
+  .promo-video-caption-desc {
+    @apply mt-2 text-sm leading-relaxed text-caira-navy/70;
+  }
+
+  .promo-video-controls {
+    @apply mt-5 flex items-center justify-center gap-4;
+  }
+
+  .promo-video-nav {
+    @apply flex h-10 w-10 items-center justify-center rounded-full border border-caira-navy/10 bg-white text-caira-navy/70 transition hover:border-caira-teal/30 hover:text-caira-teal;
+  }
+
+  .promo-video-dots {
+    @apply flex items-center gap-2;
+  }
+
+  .promo-video-dot {
+    @apply h-2.5 w-2.5 rounded-full bg-caira-navy/15 transition hover:bg-caira-teal/40;
+  }
+
+  .promo-video-dot.is-active {
+    @apply w-6 bg-caira-teal;
+  }
+
   .hero-stage {
     @apply relative mx-auto w-full max-w-xl overflow-visible select-none sm:max-w-2xl lg:mx-0 lg:translate-y-3;
     perspective: 1400px;

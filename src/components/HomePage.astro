@@ -15,6 +15,7 @@ import SpotlightSection from './SpotlightSection.astro';
 import FinalCTA from './FinalCTA.astro';
 import AiAgentsStrip from './AiAgentsStrip.astro';
 import ScreenshotShowcase from './ScreenshotShowcase.astro';
+import PromoVideo from './PromoVideo.astro';
 import type { Locale } from '../i18n/config';
 import { getMessages } from '../i18n';
 import { buildHomePageData, screenshots } from '../i18n/home-data';
@@ -64,6 +65,8 @@ const data = buildHomePageData(m);
       </div>
     </div>
   </section>
+
+  <PromoVideo promoVideo={m.promoVideo} />
 
   <Marquee items={m.marqueeItems} />
   <StatsStrip stats={data.stats} />

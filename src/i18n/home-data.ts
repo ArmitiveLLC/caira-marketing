@@ -103,6 +103,18 @@ const statValues = [
 
 const pilotSteps = ['01', '02', '03'];
 
+const promoVideoAssets = [
+  { src: '/videos/caira-care-simplified.mp4', poster: '/splash.png' },
+  { src: '/videos/how-caira-voice-logging-works.mp4', poster: '/screenshots/app-teacher-voice-log.png' },
+];
+
+export function buildPromoVideos(promoVideo: Messages['promoVideo']) {
+  return promoVideo.items.map((item, i) => ({
+    ...item,
+    ...promoVideoAssets[i],
+  }));
+}
+
 export function buildHomePageData(m: Messages) {
   return {
     heroSlides: m.heroSlides.map((slide, i) => ({
