@@ -1,7 +1,7 @@
 ---
 title: Privacy Policy
 description: How Caira collects, uses, and protects information for childcare centers, staff, and families.
-lastUpdated: '2026-08-08'
+lastUpdated: '2026-09-05'
 ---
 
 Caira ("we," "us," or "our") provides software for licensed childcare centers, including mobile and web applications at [app.caira.care](https://app.caira.care) and related services. This Privacy Policy describes how we handle personal information when you use Caira.
@@ -34,6 +34,7 @@ Centers may enter information about enrolled children, such as:
 - Daily care logs, developmental notes, and attendance
 - Photos and short voice notes captured by staff for activity documentation
 - Pickup authorization and check-in/check-out records
+- Symptom and absence reports related to illness or wellness (when families or staff submit them)
 
 Centers are responsible for obtaining appropriate consent from parents or guardians before sharing child information in Caira, consistent with applicable law and center policies.
 
@@ -47,7 +48,8 @@ Centers are responsible for obtaining appropriate consent from parents or guardi
 ### Content you provide
 
 - Messages, activity logs, lesson plans, meal records, and files uploaded through the service
-- Voice recordings and photos when staff use logging features (processed to generate summaries and insights as configured by your center)
+- Voice recordings and photos when staff or families use logging or AI-assisted features (processed to generate summaries and insights as configured by your center)
+- Questions you ask in Ask Caira or staff assistant chats
 
 ## How we use information
 
@@ -55,9 +57,10 @@ We use information to:
 
 - Provide, maintain, and improve Caira for your center
 - Authenticate users and enforce role-based access
-- Generate AI-assisted summaries, insights, and parent-facing narratives when enabled by your center
+- Generate AI-assisted summaries, insights, translations, and parent-facing narratives when enabled by your center
 - Send notifications about classroom activity, messages, and account events
 - Support compliance workflows such as meal program documentation (e.g., CACFP) and developmental frameworks (e.g., GELDS, GOLD)
+- Support wellness workflows such as symptom clustering and draft health guidance for staff review
 - Monitor security, prevent fraud, and troubleshoot technical issues
 - Comply with legal obligations and respond to lawful requests
 
@@ -65,15 +68,25 @@ We do not sell personal information. We do not use child information for third-p
 
 ## AI and automated processing
 
-When AI features are enabled, Caira may process photos, voice notes, and text logs to:
+When you use AI features (or when your center enables them), Caira may send certain content to **Google Vertex AI (Gemini)** on Google Cloud — called only from Caira’s servers — for app functionality, not advertising. Features that may use this processor include:
 
-- Transcribe or summarize daily activities
-- Suggest developmental or behavioral insights for staff review
-- Draft parent updates that staff or directors can review before sharing
+- **Ask Caira** (parent questions about classroom observations)
+- **Teacher and director assistants** (classroom or center Q&A, including voice)
+- **AI Log** (text, voice, or photo activity logging)
+- **Voice transcription** for notes and assistants
+- **Message translation** between English and Spanish
+- **Insights and learning tools** (daily/weekly narratives, lesson-plan analysis, learning-manager chat)
+- **Wellness** (symptom-related cluster detection and draft parent health guidance for staff review)
 
-**PII scrubbing before AI.** Before any request is sent to our AI provider (Google Vertex AI within Google Cloud), Caira applies a scrubbing gate: child names are replaced with opaque per-request tokens, and common identifiers such as email addresses and phone numbers are removed. Token mappings exist only in memory for the duration of a single request and are not persisted. AI responses are checked for safety; identifiers are restored only inside Caira before staff review.
+**What may be sent**, depending on the feature you choose: your question or message text; staff activity notes; classroom photos; short voice recordings; and related classroom or symptom context.
 
-AI outputs are assistive. Staff and centers remain responsible for reviewing content before it is shared with families or used for compliance purposes.
+**Photos and voice recordings.** When you capture or upload a photo or voice recording for an AI feature, that media may be sent to Google Vertex AI for analysis or transcription. Text-based PII scrubbing does not apply the same way to raw photos and audio.
+
+**PII scrubbing for text.** Before text content is sent to Google Vertex AI, Caira applies a scrubbing gate where practicable: child names are replaced with opaque per-request tokens, and common identifiers such as email addresses and phone numbers are removed. Token mappings exist only in memory for the duration of a single request and are not persisted. AI responses are checked for safety; identifiers are restored only inside Caira before staff review.
+
+**Permission in the app.** The Caira mobile app asks for your permission before sharing personal data with Google Vertex AI for these features. You can decline and continue using non-AI parts of the app. Privacy Policy and Terms links are also available in Settings.
+
+AI outputs are assistive. Staff and centers remain responsible for reviewing content before it is shared with families or used for compliance or health communications.
 
 ## How we share information
 
@@ -81,6 +94,7 @@ We may share information:
 
 - **Within your center** according to role permissions (e.g., teachers see their classrooms; parents see their linked children)
 - **With service providers** who help us operate Caira (cloud hosting, authentication, analytics, customer support), under contracts that limit their use of data
+- **With Google (Google Cloud / Vertex AI)** as a processor when you use AI features described above — for processing on Caira’s behalf, not for Google’s advertising
 - **For legal reasons** when required by law, to protect rights and safety, or in connection with a merger or acquisition (with notice where required)
 - **With your direction** when your center exports data or integrates with approved third-party tools
 
@@ -105,6 +119,7 @@ Depending on your location and role, you may have rights to:
 - Access, correct, or delete certain personal information
 - Opt out of non-essential communications
 - Disable push notifications in device or app settings
+- Decline AI data sharing in the mobile app (AI features remain unavailable until you allow sharing)
 
 Parents and staff should contact their center director for most data requests related to a child's record. You may also contact us at [support@caira.care](mailto:support@caira.care).
 
